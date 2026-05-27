@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borosil — Integrated Marketing Showcase · Bhaswati Bera</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#1B3A6B;
+  --navy-dark:#122754;
+  --navy-light:#EEF1F8;
+  --navy-mid:#4A6FA5;
+  --navy-pale:#F3F5FA;
+  --ink:#1A1A1A;
+  --ink-mid:#444444;
+  --muted:#888888;
+  --bg:#FFFFFF;
+  --surface:#F7FAFA;
+  --border:#E5EDED;
+  --white:#FFFFFF;
+  --orange:#F07730;
+  --orange-light:#FEF0E8;
+  --green:#2E8B57;
+  --green-light:#EAF5EE;
+  --amber:#D4850A;
+  --amber-light:#FEF5E4;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;letter-spacing:-0.01em;background:var(--bg);color:var(--ink);overflow-x:hidden}
+
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:0 64px;display:flex;align-items:center;justify-content:space-between;height:64px;
+}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:36px;height:36px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.nav-logo-inner{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center}
+.nav-dot{width:7px;height:7px;background:white;border-radius:50%}
+.nav-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)}
+.nav-name span{color:var(--navy)}
+.nav-links{display:flex;gap:28px}
+.nav-link{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;font-weight:600}
+.nav-link:hover{color:var(--navy)}
+.nav-pill{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--navy);border:1px solid rgba(0,123,124,0.3);padding:6px 14px;border-radius:20px;text-transform:uppercase}
+
+/* HERO */
+.hero{
+  padding:80px 64px 0;display:grid;grid-template-columns:55% 45%;
+  gap:56px;align-items:center;min-height:calc(100vh - 64px);
+  position:relative;overflow:hidden;background:var(--white);
+}
+.hero-circle1{position:absolute;right:-160px;top:-160px;width:520px;height:520px;border-radius:50%;background:var(--navy-light);pointer-events:none;z-index:0}
+.hero-circle2{position:absolute;right:140px;bottom:-100px;width:240px;height:240px;border-radius:50%;background:rgba(0,123,124,0.04);pointer-events:none;z-index:0}
+.hero-left{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--navy-light);color:var(--navy);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;padding:7px 16px;border-radius:20px;margin-bottom:24px;text-transform:uppercase;font-weight:500}
+.hero-badge-dot{width:7px;height:7px;background:var(--navy);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(44px,5.5vw,70px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.hero-title span{color:var(--navy)}
+.hero-desc{font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;max-width:460px;margin-bottom:36px}
+.hero-meta{display:flex;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:40px;width:fit-content}
+.hmi{padding:12px 20px;border-right:1px solid var(--border)}
+.hmi:last-child{border-right:none}
+.hmi-key{font-size:9px;color:var(--muted);margin-bottom:3px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.hmi-val{font-size:13px;color:var(--ink);font-weight:700}
+.hero-btns{display:flex;align-items:center;gap:12px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:white;font-size:14px;font-weight:700;padding:14px 28px;border-radius:8px;cursor:pointer;border:none;transition:all 0.2s;font-family:'Inter',sans-serif}
+.btn-primary:hover{background:var(--navy-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,123,124,0.3)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--navy);font-size:14px;font-weight:700;padding:14px 22px;border-radius:8px;cursor:pointer;border:1.5px solid var(--border);transition:all 0.2s;font-family:'Inter',sans-serif}
+.btn-outline:hover{border-color:var(--navy);background:var(--navy-light)}
+
+.hero-right{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-bottom:48px}
+.kpi{background:var(--white);border-radius:16px;padding:26px 22px;border:1.5px solid var(--border);transition:all 0.2s}
+.kpi:hover{transform:translateY(-4px);border-color:var(--navy-mid);box-shadow:0 12px 32px rgba(0,123,124,0.1)}
+.kpi.hero-teal{background:var(--navy);border-color:var(--navy)}
+.kpi-icon{font-size:20px;margin-bottom:10px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:6px}
+.kpi.hero-teal .kpi-val{color:white}
+.kpi-label{font-size:12px;color:var(--muted);line-height:1.4}
+.kpi.hero-teal .kpi-label{color:rgba(255,255,255,0.7)}
+
+/* SECTIONS */
+.sec{padding:80px 64px}
+.sec-inner{max-width:1140px;margin:0 auto}
+.sec.alt{background:var(--surface)}
+.sec.teal{background:var(--navy)}
+.sec-chip{display:inline-flex;align-items:center;gap:6px;background:var(--navy-light);color:var(--navy-dark);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;padding:5px 14px;border-radius:20px;text-transform:uppercase;margin-bottom:14px;font-weight:500}
+.sec.teal .sec-chip{background:rgba(255,255,255,0.15);color:white}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.1;letter-spacing:-0.8px;margin-bottom:12px;color:var(--ink)}
+.sec-h span{color:var(--navy)}
+.sec.teal .sec-h{color:white}
+.sec-lead{font-size:15px;color:var(--muted);line-height:1.7;max-width:580px;margin-bottom:48px}
+.sec.teal .sec-lead{color:rgba(255,255,255,0.6)}
+
+/* SCOPE */
+.scope-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.sc{background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border);transition:all 0.2s;cursor:default}
+.sc:hover{transform:translateY(-4px);border-color:var(--navy-mid);box-shadow:0 12px 32px rgba(0,123,124,0.08)}
+.sc-emoji{font-size:28px;margin-bottom:14px}
+.sc-name{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:var(--ink);margin-bottom:8px}
+.sc-desc{font-size:13px;color:var(--muted);line-height:1.65}
+.sc-tag{display:inline-flex;margin-top:14px;background:var(--navy-light);color:var(--navy-dark);font-family:'DM Mono',monospace;font-size:8px;padding:3px 10px;border-radius:10px;letter-spacing:0.08em;font-weight:500}
+.scope-bottom{background:var(--navy);border-radius:16px;padding:36px 44px;display:flex;justify-content:space-between;align-items:center;gap:32px}
+.scope-bottom-text{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.7;max-width:560px}
+.scope-bottom-text strong{color:white;font-weight:700}
+.scope-bottom-stat{text-align:center;flex-shrink:0}
+.scope-bottom-val{font-family:'Playfair Display',serif;font-size:60px;font-weight:700;color:white;line-height:1}
+.scope-bottom-lbl{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px}
+
+/* CELEBRITY */
+.celeb-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.celeb-quote-box{background:var(--navy);border-radius:14px;padding:28px;margin-bottom:18px}
+.celeb-q{font-size:17px;color:white;line-height:1.6;font-style:italic;font-weight:300;margin-bottom:12px}
+.celeb-q-attr{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.45);letter-spacing:0.1em;text-transform:uppercase}
+.steps{display:flex;flex-direction:column;gap:12px}
+.step{background:var(--white);border-radius:12px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;border:1.5px solid var(--border);transition:all 0.2s}
+.step:hover{border-color:var(--navy-mid);transform:translateX(4px)}
+.step-n{background:var(--navy);color:white;font-family:'DM Mono',monospace;font-size:9px;padding:4px 8px;border-radius:6px;flex-shrink:0;margin-top:1px;letter-spacing:0.06em}
+.step-t{font-size:13px;color:var(--ink-mid);line-height:1.6}
+.step-t strong{color:var(--ink);font-weight:700}
+
+.result-box{background:var(--white);border-radius:16px;padding:32px;border:1.5px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,0.05)}
+.result-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.result-badge{background:var(--orange-light);color:var(--orange);font-size:10px;padding:3px 10px;border-radius:10px}
+.result-big{font-family:'Playfair Display',serif;font-size:76px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:4px}
+.result-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+.result-note{background:var(--navy-light);border-radius:10px;padding:16px 18px;border-left:3px solid var(--navy);margin-bottom:14px}
+.result-note p{font-size:12px;color:var(--ink-mid);line-height:1.65}
+.result-note strong{color:var(--navy-dark);font-weight:700}
+.result-pills{display:flex;flex-direction:column;gap:8px}
+.rpill{background:var(--surface);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.rpill-key{font-size:12px;color:var(--muted)}
+.rpill-val{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:10px;font-weight:500}
+
+/* RETAIL */
+.retail-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.rc{background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border);transition:all 0.2s}
+.rc:hover{transform:translateY(-3px);border-color:var(--navy-mid);box-shadow:0 8px 28px rgba(0,123,124,0.08)}
+.rc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.rc-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink)}
+.rc-tag{font-family:'DM Mono',monospace;font-size:9px;padding:4px 10px;border-radius:10px;letter-spacing:0.06em;font-weight:500}
+.rc-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.rc-items{display:flex;flex-direction:column;gap:8px}
+.rc-item{font-size:12px;color:var(--ink-mid);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.rc-dot{width:6px;height:6px;border-radius:50%;background:var(--navy);margin-top:5px;flex-shrink:0}
+.retail-banner{background:var(--navy);border-radius:16px;padding:36px 44px;display:flex;align-items:center;gap:40px}
+.retail-big{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;color:white;line-height:1;flex-shrink:0}
+.retail-div{width:1px;height:60px;background:rgba(255,255,255,0.2);flex-shrink:0}
+.retail-txt{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7}
+.retail-txt strong{color:white;font-weight:700}
+
+/* EVENT */
+.event-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.event-card{background:var(--white);border-radius:20px;overflow:hidden;border:1.5px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,0.06)}
+.event-top{background:var(--navy);padding:36px 32px 28px;position:relative;overflow:hidden}
+.event-rings{position:absolute;right:-20px;top:-20px;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,0.08)}
+.event-rings::before{content:'';position:absolute;top:18px;left:18px;right:18px;bottom:18px;border-radius:50%;border:1px solid rgba(255,255,255,0.06)}
+.event-ed{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;position:relative;z-index:1}
+.event-name-big{font-family:'Playfair Display',serif;font-size:72px;font-weight:700;color:white;line-height:0.9;letter-spacing:-3px;position:relative;z-index:1}
+.event-fullname{font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:10px;position:relative;z-index:1;line-height:1.7}
+.event-stats{display:grid;grid-template-columns:1fr 1fr 1fr}
+.event-stat{padding:20px 16px;text-align:center;border-right:1px solid var(--border)}
+.event-stat:last-child{border-right:none}
+.event-stat-v{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:4px}
+.event-stat-l{font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase}
+.event-right{display:flex;flex-direction:column;gap:18px}
+.event-role{background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border)}
+.event-role-title{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;color:var(--ink);margin-bottom:16px}
+.event-tasks{display:flex;flex-direction:column;gap:10px}
+.event-task{font-size:13px;color:var(--ink-mid);display:flex;align-items:flex-start;gap:10px;line-height:1.55}
+.et-arrow{color:var(--navy);font-size:14px;flex-shrink:0;font-weight:700}
+.event-callout{background:var(--navy-light);border-radius:10px;padding:18px 20px;border-left:3px solid var(--navy)}
+.event-callout p{font-size:13px;color:var(--ink-mid);line-height:1.65}
+.event-callout strong{color:var(--navy-dark);font-weight:700}
+
+/* CAMPAIGNS */
+.camp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.cc{background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border);transition:all 0.2s}
+.cc:hover{transform:translateY(-3px);border-color:var(--navy-mid)}
+.cc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.cc-name{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink)}
+.cc-roas{background:var(--navy-light);color:var(--navy-dark);font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:10px;letter-spacing:0.06em;font-weight:500}
+.cc-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.cc-m{background:var(--surface);border-radius:8px;padding:14px;text-align:center}
+.cc-m-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy)}
+.cc-m-lbl{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.05em;margin-top:2px}
+.cc-desc{font-size:12px;color:var(--muted);line-height:1.65}
+.formats{background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border)}
+.formats-ttl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;margin-bottom:18px}
+.formats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fmt{background:var(--surface);border-radius:10px;padding:18px 12px;text-align:center;border:1px solid var(--border);transition:all 0.2s}
+.fmt:hover{border-color:var(--navy-mid);transform:translateY(-2px);background:var(--navy-light)}
+.fmt-emoji{font-size:24px;margin-bottom:8px}
+.fmt-name{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.fmt-sub{font-size:10px;color:var(--muted);line-height:1.4}
+
+/* DIGITAL */
+.dig-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.dc{background:var(--white);border-radius:14px;padding:26px;border:1.5px solid var(--border);transition:all 0.2s}
+.dc:hover{transform:translateY(-4px);border-color:var(--navy-mid);box-shadow:0 10px 32px rgba(0,123,124,0.08)}
+.dc-icon{width:44px;height:44px;background:var(--navy-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.dc-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.dc-title{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:8px}
+.dc-body{font-size:12px;color:var(--muted);line-height:1.65}
+.dc-metric{margin-top:16px;padding:12px 14px;background:var(--surface);border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+.dc-mval{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy)}
+.dc-mlbl{font-size:10px;color:var(--muted)}
+
+/* RETRO */
+.retro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.retro{background:rgba(255,255,255,0.1);border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,0.15);transition:all 0.2s}
+.retro:hover{background:rgba(255,255,255,0.16);transform:translateY(-3px)}
+.retro-n{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.45);letter-spacing:0.12em;margin-bottom:12px}
+.retro-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:white;margin-bottom:10px;line-height:1.25}
+.retro-body{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.65}
+.retro-fix{margin-top:16px;padding:14px 16px;background:rgba(255,255,255,0.1);border-radius:8px;border-left:3px solid rgba(255,255,255,0.3)}
+.retro-fix-lbl{font-size:8px;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:5px}
+.retro-fix p{font-size:12px;color:rgba(255,255,255,0.65);line-height:1.55}
+
+/* FOOTER */
+.footer{background:var(--ink);padding:40px 64px;display:flex;justify-content:space-between;align-items:center}
+.footer-left strong{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:white;display:block;margin-bottom:4px}
+.footer-left p{font-size:12px;color:rgba(255,255,255,0.3)}
+.footer-tags{display:flex;gap:10px}
+.ftag{font-family:'DM Mono',monospace;font-size:9px;padding:6px 12px;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:rgba(255,255,255,0.3);letter-spacing:0.08em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp 0.6s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.42s}
+
+/* PROMOTION TIMELINE */
+.promo-timeline{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;margin:28px 0 20px;background:var(--white);border-radius:14px;border:1.5px solid var(--border);overflow:hidden}
+.promo-phase{padding:24px 28px}
+.promo-phase.promoted{background:var(--navy-light)}
+.promo-phase-dot{width:10px;height:10px;border-radius:50%;background:var(--border);margin-bottom:10px}
+.promo-phase-dot.promoted{background:var(--navy)}
+.promo-phase-tag{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.promo-phase-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.promo-phase.promoted .promo-phase-title{color:var(--navy)}
+.promo-phase-desc{font-size:11px;color:var(--muted);line-height:1.6}
+.promo-arrow-wrap{display:flex;flex-direction:column;align-items:center;gap:0;padding:0 4px}
+.promo-line{width:1px;height:32px;background:var(--border)}
+.promo-badge{background:var(--navy);color:white;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;padding:7px 12px;border-radius:20px;white-space:nowrap;text-align:center}
+/* CAMPAIGN CONTEXT */
+.camp-context{display:flex;align-items:stretch;background:var(--white);border-radius:12px;border:1.5px solid var(--border);margin-top:20px;overflow:hidden}
+.camp-context-item{flex:1;padding:20px 24px}
+.camp-context-divider{width:1px;background:var(--border);flex-shrink:0}
+.camp-context-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.camp-context-val{font-size:13px;font-weight:600;color:var(--ink)}
+
+.sc-bullets span{font-size:12px;color:var(--ink-mid);padding-left:10px;position:relative}
+.sc-bullets span::before{content:'·';position:absolute;left:0;color:var(--navy)}
+.cc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cc-tags span{font-size:11px;background:var(--navy-light);color:var(--navy-dark);padding:3px 10px;border-radius:12px;font-weight:500}
+.dc-bullets{display:flex;flex-direction:column;gap:5px;margin:10px 0}
+.dc-bullets span{font-size:12px;color:var(--ink-mid);padding-left:10px;position:relative}
+.dc-bullets span::before{content:'·';position:absolute;left:0;color:var(--navy)}
+.retro-kpi-row{display:flex;gap:8px;margin:12px 0}
+.retro-kpi{font-size:11px;background:rgba(255,255,255,0.15);color:white;padding:4px 10px;border-radius:10px;font-family:'DM Mono',monospace;letter-spacing:0.06em}
+.retro-kpi-miss{font-size:11px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);padding:4px 10px;border-radius:10px;font-family:'DM Mono',monospace;letter-spacing:0.06em}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div id="bb-sidebar" style="position:fixed;top:0;left:0;width:220px;height:100vh;background:#fff;border-right:1px solid #E2DDD8;z-index:8000;display:flex;flex-direction:column;transform:translateX(-220px);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);overflow:hidden;">
+  <!-- Sidebar Header -->
+  <div style="padding:20px 20px 16px;border-bottom:1px solid #E2DDD8;flex-shrink:0;">
+    <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#0D0D0D;letter-spacing:-0.3px;">B<span style="color:#C4622D;">.</span>Bera</div>
+    <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-top:3px;">Portfolio</div>
+  </div>
+  <!-- Nav -->
+  <div style="flex:1;overflow-y:auto;padding:8px 0;">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="if(this.style.borderLeftColor!='rgb(196, 98, 45)'){this.style.background='#f5f5f5';this.style.color='#111';}" onmouseleave="if(this.style.borderLeftColor!='rgb(196, 98, 45)'){this.style.background='transparent';this.style.color='#444';}">
+      <span style="font-size:13px;">🏠</span>
+      <span>Home</span>
+      
+    </a>
+    <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#999;padding:20px 20px 6px;margin-top:4px;">Real Work</div>
+    <a href="nua.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">🌸</span><span>Nua</span></a><a href="oziva.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">🌿</span><span>OZiva</span></a><a href="borosil.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:600;color:#2C4A8A;text-decoration:none;border-left:2px solid #2C4A8A;background:#2C4A8A15;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='#2C4A8A15'">
+  <span style="font-size:13px;">🫙</span><span>Borosil</span></a>
+    <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#999;padding:20px 20px 6px;">Hypothetical GTM</div>
+    <a href="youtube-premium-lite.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">▶</span><span>YouTube Premium Lite</span></a><a href="meta-ai-whatsapp.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">💬</span><span>Meta AI · WhatsApp</span></a><a href="meta-advantage-plus.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">📊</span><span>Meta Advantage+</span></a><a href="amazon-now.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">⚡</span><span>Amazon Now</span></a><a href="gemini-workspace.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">✦</span><span>Gemini Workspace</span></a>
+  </div>
+  <!-- Footer -->
+  <div style="padding:16px 20px;border-top:1px solid #E2DDD8;flex-shrink:0;">
+    <a href="mailto:bhaswatibera07@gmail.com" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;color:#999;text-decoration:none;display:block;transition:color 0.2s;" onmouseenter="this.style.color='#C4622D'" onmouseleave="this.style.color='#999'">bhaswatibera07@gmail.com</a>
+    <a href="https://linkedin.com/in/bhaswati-bera-22948b21b" target="_blank" rel="noreferrer noopener" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;color:#999;text-decoration:none;display:block;margin-top:4px;transition:color 0.2s;" onmouseenter="this.style.color='#C4622D'" onmouseleave="this.style.color='#999'">LinkedIn →</a>
+  </div>
+</div>
+
+<!-- SIDEBAR TOGGLE BUTTON -->
+<button id="bb-toggle" onclick="toggleSidebar()" style="position:fixed;top:16px;left:16px;z-index:9000;width:40px;height:40px;border-radius:8px;background:#fff;border:1.5px solid #E2DDD8;display:flex;align-items:center;justify-content:center;cursor:pointer!important;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.08);" onmouseenter="this.style.background='#0D0D0D';this.style.borderColor='#0D0D0D';document.getElementById('bb-hamburger').style.color='white'" onmouseleave="this.style.background='white';this.style.borderColor='#E2DDD8';document.getElementById('bb-hamburger').style.color='#0D0D0D'">
+  <span id="bb-hamburger" style="font-size:16px;color:#0D0D0D;line-height:1;font-family:monospace;">☰</span>
+</button>
+
+<!-- OVERLAY BACKDROP -->
+<div id="bb-backdrop" onclick="closeSidebar()" style="position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:7999;display:none;backdrop-filter:blur(2px);"></div>
+
+<script>
+function toggleSidebar(){
+  const sb=document.getElementById('bb-sidebar');
+  const bd=document.getElementById('bb-backdrop');
+  const open=sb.style.transform==='translateX(0px)';
+  if(open){
+    sb.style.transform='translateX(-220px)';
+    bd.style.display='none';
+  }else{
+    sb.style.transform='translateX(0px)';
+    bd.style.display='block';
+  }
+}
+function closeSidebar(){
+  document.getElementById('bb-sidebar').style.transform='translateX(-220px)';
+  document.getElementById('bb-backdrop').style.display='none';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+</script>
+
+
+<nav class="nav">
+  <div class="nav-brand">
+    <svg width="120" height="36" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="60" fill="white"/>
+      <text x="4" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="38" fill="#1B3A6B" letter-spacing="2">BOROSIL</text>
+      <text x="186" y="20" font-family="Arial, sans-serif" font-size="13" fill="#1B3A6B">®</text>
+    </svg>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="#scope" onclick="event.preventDefault();document.getElementById('scope').scrollIntoView({behavior:'smooth'})">Scope</a>
+    <a class="nav-link" href="#celebrity" onclick="event.preventDefault();document.getElementById('celebrity').scrollIntoView({behavior:'smooth'})">Celebrity</a>
+    <a class="nav-link" href="#retail" onclick="event.preventDefault();document.getElementById('retail').scrollIntoView({behavior:'smooth'})">Retail</a>
+    <a class="nav-link" href="#event" onclick="event.preventDefault();document.getElementById('event').scrollIntoView({behavior:'smooth'})">Events</a>
+    <a class="nav-link" href="#campaigns" onclick="event.preventDefault();document.getElementById('campaigns').scrollIntoView({behavior:'smooth'})">Campaigns</a>
+    <a class="nav-link" href="#retrospective" onclick="event.preventDefault();document.getElementById('retrospective').scrollIntoView({behavior:'smooth'})">Retrospective</a>
+  </div>
+  <div class="nav-pill">Portfolio · Bhaswati Bera</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-circle1"></div>
+  <div class="hero-circle2"></div>
+  <div class="hero-left">
+    <div class="hero-badge fu"><div class="hero-badge-dot"></div>Integrated Marketing Showcase</div>
+    <h1 class="hero-title fu d1">Every function.<br><span>One person.</span></h1>
+    <p class="hero-desc fu d2">Most brands distribute this across 4–5 people. At Borosil, the connective tissue between every function was one person — which meant the Sokhi campaign, the HGH booth, the Amazon listings, and the Meta ads all spoke the same language. That coherence is harder to manufacture than any individual result.</p>
+    <div class="hero-meta fu d3">
+      <div class="hmi"><div class="hmi-key">Tenure</div><div class="hmi-val">Jun 2024 – Dec 2025</div></div>
+      <div class="hmi"><div class="hmi-key">Promoted in</div><div class="hmi-val" style="color:var(--navy)">8 months ↑</div></div>
+      <div class="hmi"><div class="hmi-key">Real scope</div><div class="hmi-val">Marketing Manager</div></div>
+    </div>
+    <div class="hero-btns fu d4">
+      <button class="btn-primary" onclick="document.getElementById('scope').scrollIntoView({behavior:'smooth'})">View showcase ↓</button>
+    </div>
+  </div>
+  <div class="hero-right fu d2">
+    <div class="kpi hero-teal">
+      <div class="kpi-icon">📈</div>
+      <div class="kpi-val">4×</div>
+      <div class="kpi-label">ROAS on Meta & Google Ads</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-val">₹1Cr</div>
+      <div class="kpi-label">Revenue from retail PDP & A+ content</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-icon">🚀</div>
+      <div class="kpi-val">₹10L</div>
+      <div class="kpi-label">Tiffin day-1 sales · Punjab only</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-icon">🎪</div>
+      <div class="kpi-val">1L+</div>
+      <div class="kpi-label">HGH India trade event visitors</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="sec alt" id="scope">
+  <div class="sec-inner">
+    <div class="sec-chip">01 — Scope of work</div>
+    <h2 class="sec-h">Not a content role. A <span>marketing function.</span></h2>
+    <div class="scope-grid">
+      <div class="sc"><div class="sc-emoji">🎯</div><div class="sc-name">Brand Strategy</div><div class="sc-bullets"><span>Brand guidelines & TOV</span><span>Positioning frameworks</span><span>Visual identity</span></div><div class="sc-tag">Strategic</div></div>
+      <div class="sc"><div class="sc-emoji">🎬</div><div class="sc-name">Celebrity & Influencer</div><div class="sc-bullets"><span>Chef Harpal Singh Sokhi</span><span>Multi-studio coordination</span><span>Amazon + trade content</span></div><div class="sc-tag">Partnerships</div></div>
+      <div class="sc"><div class="sc-emoji">🏪</div><div class="sc-name">Retail Partnerships</div><div class="sc-bullets"><span>DMart & Reliance LFS</span><span>PDPs & A+ content</span><span>₹1Cr revenue impact</span></div><div class="sc-tag">Commercial</div></div>
+      <div class="sc"><div class="sc-emoji">📣</div><div class="sc-name">PR & Events</div><div class="sc-bullets"><span>100% on-time PR delivery</span><span>HGH India — 1L+ visitors</span><span>Media coverage</span></div><div class="sc-tag">Operational</div></div>
+      <div class="sc"><div class="sc-emoji">📱</div><div class="sc-name">Integrated Campaigns</div><div class="sc-bullets"><span>Full budget ownership</span><span>Meta & Google Ads</span><span>ROAS 4× consistently</span></div><div class="sc-tag">Performance</div></div>
+      <div class="sc"><div class="sc-emoji">📦</div><div class="sc-name">Amazon & SEO</div><div class="sc-bullets"><span>PDPs & A+ modules</span><span>15%+ ranking uplift</span><span>1-day TAT</span></div><div class="sc-tag">Digital</div></div>
+    </div>
+    <!-- Promotion timeline -->
+    <div class="promo-timeline">
+      <div class="promo-phase">
+        <div class="promo-phase-dot"></div>
+        <div class="promo-phase-content">
+          <div class="promo-phase-tag">Jun 2024 – Jan 2025 · 8 months</div>
+          <div class="promo-phase-title">Content Marketing Executive</div>
+          <div class="promo-phase-desc">PDPs · A+ content · SEO listings · Packaging copy · Video briefs · Catalogue & POS assets</div>
+        </div>
+      </div>
+      <div class="promo-arrow-wrap">
+        <div class="promo-line"></div>
+        <div class="promo-badge">Promoted in 8 months ↑</div>
+        <div class="promo-line"></div>
+      </div>
+      <div class="promo-phase promoted">
+        <div class="promo-phase-dot promoted"></div>
+        <div class="promo-phase-content">
+          <div class="promo-phase-tag">Feb 2025 – Dec 2025 · 11 months</div>
+          <div class="promo-phase-title">Content & Brand Marketing Executive</div>
+          <div class="promo-phase-desc">GTM strategy · Brand guidelines · Integrated campaigns · Celebrity collabs · Retail partnerships · PR · HGH India · Full budget ownership</div>
+        </div>
+      </div>
+    </div>
+    <div class="scope-bottom">
+      <p class="scope-bottom-text">The promotion came after 8 months — not at the 1-year mark. It reflected scope that was already being delivered at a level above the title. <strong>Marketing Manager work, Executive title.</strong> That's the gap this portfolio closes.</p>
+      <div class="scope-bottom-stat"><div class="scope-bottom-val">19</div><div class="scope-bottom-lbl">Months · Full scope</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CELEBRITY -->
+<section class="sec" id="celebrity">
+  <div class="sec-inner">
+    <div class="sec-chip">02 — Celebrity collaboration</div>
+    <h2 class="sec-h">Chef Harpal Singh Sokhi. <span>₹10L on day one.</span></h2>
+    <div class="celeb-grid">
+      <div>
+        <div class="celeb-quote-box">
+          <div class="celeb-q">"The offline market doesn't buy from brands. It buys from people it trusts."</div>
+          <div class="celeb-q-attr">Strategic rationale · Bhaswati Bera</div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-n">01</div><div class="step-t">Sokhi's fanbase = Punjab & Hindi-belt — Borosil's offline growth target</div></div>
+          <div class="step"><div class="step-n">02</div><div class="step-t">Coordinated multiple studios → high-quality Amazon & trade videos</div></div>
+          <div class="step"><div class="step-n">03</div><div class="step-t">Co-launched Tiffin Box: product + messaging + activation as one</div></div>
+          <div class="step"><div class="step-n">04</div><div class="step-t">100% on-time, on-brief across all collaboration assets</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="result-box">
+          <div class="result-lbl">Day 1 · Punjab only <span class="result-badge">Single state</span></div>
+          <div class="result-big">₹10L</div>
+          <div class="result-sub">Tiffin box launch · day one sales</div>
+          <div class="result-note"><p><strong>Punjab only.</strong> Pan-India potential was significantly higher. Proved: <strong>trust-led launches outperform awareness-led launches</strong> in offline categories.</p></div>
+          <div class="result-pills">
+            <div class="rpill"><span class="rpill-key">Content delivery</span><span class="rpill-val" style="background:var(--green-light);color:var(--green)">100% on-time</span></div>
+            <div class="rpill"><span class="rpill-key">Distribution</span><span class="rpill-val" style="background:var(--amber-light);color:var(--amber)">Amazon + Trade</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RETAIL -->
+<section class="sec alt" id="retail">
+  <div class="sec-inner">
+    <div class="sec-chip">03 — Retail partnerships</div>
+    <h2 class="sec-h">DMart. Reliance. <span>₹1 crore.</span></h2>
+    <div class="retail-grid">
+      <div class="rc">
+        <div class="rc-header"><div class="rc-name">DMart</div><div class="rc-tag" style="background:var(--navy-light);color:var(--navy-dark)">Value retail</div></div>
+        <div class="rc-items">
+          <div class="rc-item"><div class="rc-dot"></div>PDPs optimised for value-conscious buyers</div>
+          <div class="rc-item"><div class="rc-dot"></div>Brand-compliant listing visuals</div>
+          <div class="rc-item"><div class="rc-dot"></div>100% brief compliance via LFS team</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rc-header"><div class="rc-name">Reliance Retail</div><div class="rc-tag" style="background:var(--orange-light);color:var(--orange)">Omnichannel</div></div>
+        <div class="rc-items">
+          <div class="rc-item"><div class="rc-dot"></div>A+ modules for premium product lines</div>
+          <div class="rc-item"><div class="rc-dot"></div>POS & catalogue assets for physical retail</div>
+          <div class="rc-item"><div class="rc-dot"></div>Cross-channel messaging consistency</div>
+        </div>
+      </div>
+    </div>
+    <div class="retail-banner">
+      <div class="retail-big">₹1Cr</div>
+      <div class="retail-div"></div>
+      <div class="retail-txt"><strong>Online revenue directly attributed</strong> to PDP and A+ content built for DMart and Reliance platforms — tracked via Amazon's A+ conversion uplift data and platform analytics, pre/post content implementation. Content quality drove ranking. Ranking drove conversion.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT -->
+<section class="sec" id="event">
+  <div class="sec-inner">
+    <div class="sec-chip">04 — Trade event management</div>
+    <h2 class="sec-h">HGH India. <span>B2B pipeline built in 4 days.</span></h2>
+    <div class="event-grid">
+      <div class="event-card">
+        <div class="event-top">
+          <div class="event-rings"></div>
+          <div class="event-ed">19th Edition · Annual</div>
+          <div class="event-name-big">HGH</div>
+          <div class="event-fullname">Home Decor · Gifts · Houseware · India<br>Bombay Exhibition Centre, Mumbai</div>
+        </div>
+        <div class="event-stats">
+          <div class="event-stat"><div class="event-stat-v">1L+</div><div class="event-stat-l">Visitors</div></div>
+          <div class="event-stat"><div class="event-stat-v">100+</div><div class="event-stat-l">Brands</div></div>
+          <div class="event-stat"><div class="event-stat-v">4</div><div class="event-stat-l">Days</div></div>
+        </div>
+      </div>
+      <div class="event-right">
+        <div class="event-role">
+          <div class="event-role-title">What I owned</div>
+          <div class="event-tasks">
+            <div class="event-task"><div class="et-arrow">→</div>Booth content, messaging & visual identity</div>
+            <div class="event-task"><div class="et-arrow">→</div>Cross-functional coordination: design, sales, retail</div>
+            <div class="event-task"><div class="et-arrow">→</div>Pre-event & on-event marketing content</div>
+            <div class="event-task"><div class="et-arrow">→</div>PR submissions & media coverage</div>
+            <div class="event-task"><div class="et-arrow">→</div>Post-event B2B lead follow-up content</div>
+          </div>
+        </div>
+        <div class="event-callout">
+          <p><strong>B2B audience — buyers, distributors, retail chains.</strong> Entirely different strategy from any consumer campaign. The booth wasn't designed to generate awareness — it was designed to open distributor conversations and close retail partnerships. The post-event lead follow-up content was written for buyers, not consumers: category data, margin structures, and brand compliance assets that moved conversations from booth to contract.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAIGNS -->
+<section class="sec alt" id="campaigns">
+  <div class="sec-inner">
+    <div class="sec-chip">05 — Integrated campaigns</div>
+    <h2 class="sec-h">4× ROAS. <span>Two channels. One strategy.</span></h2>
+    <p style="font-size:14px;color:var(--ink-mid);line-height:1.75;max-width:780px;margin-bottom:32px;">Meta and Google ran different jobs. Meta built desire — awareness and consideration for a brand most consumers associated with lab glassware, not kitchenware. Google captured intent — search and shopping for buyers already in-market. The 4× ROAS held across both because the creative and copy were written for where the buyer was in the funnel, not recycled across channels.</p>
+    <div class="camp-grid">
+      <div class="cc">
+        <div class="cc-header"><div class="cc-name">Meta Ads</div><div class="cc-roas">ROAS 4×</div></div>
+        <div class="cc-metrics">
+          <div class="cc-m"><div class="cc-m-val">4×</div><div class="cc-m-lbl">Return on ad spend</div></div>
+          <div class="cc-m"><div class="cc-m-val">Awareness → Conversion</div><div class="cc-m-lbl">Full funnel, single platform</div></div>
+        </div>
+        <div class="cc-tags"><span>Awareness</span><span>Consideration</span><span>Conversion</span><span>Retargeting</span></div>
+      </div>
+      <div class="cc">
+        <div class="cc-header"><div class="cc-name">Google Ads</div><div class="cc-roas">ROAS 4×</div></div>
+        <div class="cc-metrics">
+          <div class="cc-m"><div class="cc-m-val">4×</div><div class="cc-m-lbl">Return on ad spend</div></div>
+          <div class="cc-m"><div class="cc-m-val">15%+</div><div class="cc-m-lbl">Organic ranking uplift alongside paid</div></div>
+        </div>
+        <div class="cc-tags"><span>Search</span><span>Shopping</span><span>PDP-aligned copy</span><span>Organic + Paid unified</span></div>
+      </div>
+    </div>
+    <div class="camp-context">
+      <div class="camp-context-item">
+        <div class="camp-context-label">Campaign scope</div>
+        <div class="camp-context-val">Sitewide — all categories, all product lines</div>
+      </div>
+      <div class="camp-context-divider"></div>
+      <div class="camp-context-item">
+        <div class="camp-context-label">Channel mix</div>
+        <div class="camp-context-val">In-store · Online · Events · Trade — fully integrated</div>
+      </div>
+      <div class="camp-context-divider"></div>
+      <div class="camp-context-item">
+        <div class="camp-context-label">Budget ownership</div>
+        <div class="camp-context-val">Full end-to-end with P&L accountability</div>
+      </div>
+    </div>
+    <div class="formats">
+      <div class="formats-ttl">Content formats managed</div>
+      <div class="formats-grid">
+        <div class="fmt"><div class="fmt-emoji">🎬</div><div class="fmt-name">Video</div><div class="fmt-sub">Chef collabs · demos · recipes</div></div>
+        <div class="fmt"><div class="fmt-emoji">📄</div><div class="fmt-name">PDPs & A+</div><div class="fmt-sub">Amazon · DMart · Reliance</div></div>
+        <div class="fmt"><div class="fmt-emoji">📦</div><div class="fmt-name">Packaging & POS</div><div class="fmt-sub">Trade · retail assets</div></div>
+        <div class="fmt"><div class="fmt-emoji">📰</div><div class="fmt-name">PR & Media</div><div class="fmt-sub">Press · events · brand</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIGITAL -->
+<section class="sec" id="digital">
+  <div class="sec-inner">
+    <div class="sec-chip">06 — Digital & SEO</div>
+    <h2 class="sec-h">Content that <span>ranks and converts.</span></h2>
+    <div class="dig-grid">
+      <div class="dc"><div class="dc-icon">🔍</div><div class="dc-tag">SEO & Listings</div><div class="dc-title">Amazon & D2C SEO</div><div class="dc-bullets"><span>Keyword-optimised PDPs</span><span>A9 algorithm + human readability</span><span>Full catalogue coverage</span></div><div class="dc-metric"><div class="dc-mval">15%+</div><div class="dc-mlbl">Ranking uplift</div></div></div>
+      <div class="dc"><div class="dc-icon">⭐</div><div class="dc-tag">Amazon A+</div><div class="dc-title">A+ content modules</div><div class="dc-bullets"><span>Brand story sections</span><span>Comparison charts</span><span>Premium product lines</span></div><div class="dc-metric"><div class="dc-mval">15%+</div><div class="dc-mlbl">Conversion uplift</div></div></div>
+      <div class="dc"><div class="dc-icon">⚡</div><div class="dc-tag">Cross-functional speed</div><div class="dc-title">Seasonal windows captured</div><div class="dc-bullets"><span>1-day turnaround on packaging copy, catalogues, POS assets and video briefs</span><span>Speed meant Borosil was always first to market on seasonal moments — Diwali, gifting season, new launches</span><span>More iterations per campaign cycle = better creative over time</span></div><div class="dc-metric"><div class="dc-mval">100%</div><div class="dc-mlbl">On-time, on-brief delivery</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RETRO -->
+<section class="sec teal" id="retrospective">
+  <div class="sec-inner">
+    <div class="sec-chip">07 — Honest retrospective</div>
+    <h2 class="sec-h">What I'd do differently.</h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.75;max-width:780px;margin-bottom:32px;">One specific miss worth naming: a product launch campaign mid-tenure where the Meta creative was strong but the landing page wasn't ready at the same brief quality. Traffic arrived, intent was there, and the PDP let it down — copy that didn't match the ad promise, images that weren't optimised for mobile. The ROAS on that campaign was the lowest of the 19 months. It taught me that integrated only works if every link in the chain is held to the same standard — including the ones you don't directly control, and the ones that feel like someone else's job to fix.</p>
+    <div class="retro-grid">
+      <div class="retro">
+        <div class="retro-n">Critique 01</div>
+        <div class="retro-title">Celebrity ROI tracked on day-one revenue only</div>
+        <div class="retro-kpi-row"><span class="retro-kpi">₹10L day-one</span><span class="retro-kpi-miss">No 90-day cohort</span></div>
+        <div class="retro-fix"><div class="retro-fix-lbl">Fix</div><p>Cohort Sokhi-acquired customers and track 90-day repurchase rate vs brand average. The day-one number is impressive — but if those buyers never came back, the celebrity investment ROI looks very different. The thesis was right. The proof only covers the launch, not the retention effect.</p></div>
+      </div>
+      <div class="retro">
+        <div class="retro-n">Critique 02</div>
+        <div class="retro-title">The website was treated as a support asset, not a channel</div>
+        <div class="retro-kpi-row"><span class="retro-kpi">Too many open issues</span><span class="retro-kpi-miss">Too low a priority</span></div>
+        <div class="retro-fix"><div class="retro-fix-lbl">Fix</div><p>The website is brand identity at rest — it's what a buyer, distributor, or press contact sees between every campaign. With 19 months and the full marketing function owned, a structured website improvement sprint should have been scoped early. The issues were known. They just kept getting deprioritised against louder campaign deadlines.</p></div>
+      </div>
+      <div class="retro">
+        <div class="retro-n">Critique 03</div>
+        <div class="retro-title">Breadth created attribution blind spots</div>
+        <div class="retro-kpi-row"><span class="retro-kpi">6+ functions</span><span class="retro-kpi-miss">No unified attribution</span></div>
+        <div class="retro-fix"><div class="retro-fix-lbl">Fix</div><p>Marketing Mix Model from month one — isolates which channels drove incremental revenue. When you own everything, you need to know which parts are actually pulling weight and which are just busy.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="verdict">
+  <div class="sec-inner">
+    <div class="sec-chip">The verdict</div>
+    <h2 class="sec-h">What 19 months across <span>6 functions actually teaches you.</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div style="background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border);">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">The real skill this built</div>
+        <p style="font-size:13px;color:var(--ink-mid);line-height:1.75;">When you own every function, you stop thinking in channels and start thinking in customer journeys. The Sokhi campaign worked because the Amazon listing, the trade video, and the in-store presence were all one conversation. Most marketing organisations fragment that conversation across teams. I learned to hold it together — and I learned what breaks when you don't.</p>
+      </div>
+      <div style="background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border);">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">What I'd build first in the next role</div>
+        <p style="font-size:13px;color:var(--ink-mid);line-height:1.75;">A single attribution model that connects every channel to revenue — before the first campaign goes live. At Borosil the breadth was real but the measurement wasn't unified enough to prove which parts were driving incremental growth. I know how to build the work. The next step is building the proof that travels up to leadership without losing anything in translation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">
+    <strong>Bhaswati Bera</strong>
+    <p>bhaswatibera07@gmail.com · linkedin.com/in/bhaswatibera-22948b21b</p>
+  </div>
+  <div style="font-size:13px;color:rgba(255,255,255,0.4);max-width:420px;line-height:1.6;text-align:right;">Integrated isn't a buzzword. At Borosil it was the job description. That's what I'm bringing to the next role.</div>
+</footer>
+
+
+<!-- CAMPAIGN MIX SECTION -->
+<section style="background:#F0F3F9;padding:80px 64px;" id="campaign-mix">
+  <div style="max-width:1140px;margin:0 auto;">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.06);color:#2C4A8A;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;padding:5px 14px;border-radius:20px;text-transform:uppercase;margin-bottom:14px;">Full Marketing Mix</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,40px);font-weight:700;line-height:1.1;letter-spacing:-0.8px;margin-bottom:16px;color:#1A1A1A;">Complete Campaign Playbook<span style="color:#2C4A8A;"> — What I'd Run</span></h2>
+    <p style="font-size:14px;color:#888;line-height:1.8;max-width:780px;margin-bottom:44px;">Borosil was a 19-month integrated marketing function owned by one person. Celebrity collab, retail partnerships, trade events, Meta & Google, SEO. The 4×+ ROAS held because every channel was speaking the same sentence. Here's the complete mix — rationale, brief, and what the integrated picture should have included.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+      <div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e0e0e0;">
+          <div style="font-size:17px;margin-bottom:10px;">🎬</div>
+          <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Celebrity & Influencer — Chef Harpal Sokhi</div>
+          <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">₹10L day-one Tiffin Box launch, Punjab only. Strategic choice: Sokhi's fanbase = Hindi-belt and Punjab — exactly where Borosil's offline distribution needed to grow. Trust-led launches outperform awareness-led launches in offline kitchenware.</div>
+          <div style="background:#E8EDF5;border-radius:8px;padding:14px;border-left:2px solid #2C4A8A;">
+            <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A8A;margin-bottom:6px;">POV + What I'd Add</div>
+            <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Day-one tracking only. I'd run a 90-day cohort: Sokhi-acquired customers vs brand average on repurchase rate. The celebrity investment ROI looks different if 80% of those buyers never came back. Cohort first — then scale the collab model.</div>
+          </div>
+        </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e0e0e0;">
+          <div style="font-size:17px;margin-bottom:10px;">⚡</div>
+          <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Performance Marketing — Meta Builds Desire, Google Captures Intent</div>
+          <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">4×+ ROAS across both channels. Meta ran awareness-to-conversion (repositioning Borosil from lab glassware to premium kitchenware). Google captured search intent from buyers already in-market. Different jobs, same funnel.</div>
+          <div style="background:#E8EDF5;border-radius:8px;padding:14px;border-left:2px solid #2C4A8A;">
+            <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A8A;margin-bottom:6px;">Campaign Brief</div>
+            <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Video format: Sokhi recipe demos as Meta top-of-funnel. Retargeting: product carousel with PDP-matching copy (not brand copy — conversion copy). Shopping: title SEO to capture "borosilicate cookware", "non-toxic glass cookware India" queries.</div>
+          </div>
+        </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e0e0e0;">
+          <div style="font-size:17px;margin-bottom:10px;">🏪</div>
+          <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Retail & Omnichannel — DMart, Reliance, HGH</div>
+          <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">₹1Cr revenue from PDPs and A+ content built for DMart and Reliance. The HGH booth was designed to open distributor conversations, not consumer awareness — different brief, same brand coherence.</div>
+          <div style="background:#E8EDF5;border-radius:8px;padding:14px;border-left:2px solid #2C4A8A;">
+            <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A8A;margin-bottom:6px;">POV</div>
+            <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">The post-HGH B2B lead follow-up was the underrated work — margin structures and brand compliance assets written for buyers, not consumers. That's a completely different marketing motion. I'd formalise it as a B2B content track with quarterly distributor briefing decks.</div>
+          </div>
+        </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e0e0e0;">
+          <div style="font-size:17px;margin-bottom:10px;">📚</div>
+          <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Content Marketing + SEO — The Long Game</div>
+          <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">15%+ organic ranking uplift across Borosil's catalogue. The SEO strategy ran in parallel with paid — PDP copy that served both the A9 algorithm and human conversion. Same copy, two jobs.</div>
+          <div style="background:#E8EDF5;border-radius:8px;padding:14px;border-left:2px solid #2C4A8A;">
+            <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A8A;margin-bottom:6px;">What I'd Add</div>
+            <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Borosilicate cookware is a category most Indian consumers don't understand but actively want. A blog/YouTube series — "Why your cookware matters more than your diet" — builds search authority and creates a content moat that converts at a lower CAC than any paid channel.</div>
+          </div>
+        </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e0e0e0;">
+          <div style="font-size:17px;margin-bottom:10px;">📣</div>
+          <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">PR & Experiential — Events That Close B2B</div>
+          <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">100% on-time PR delivery. HGH India: 1L+ visitors, B2B pipeline built in 4 days. Experiential marketing works for Borosil because sensory experience matters in cookware — people want to touch the glass, feel the weight, see the clarity.</div>
+          <div style="background:#E8EDF5;border-radius:8px;padding:14px;border-left:2px solid #2C4A8A;">
+            <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A8A;margin-bottom:6px;">Campaign Brief</div>
+            <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Pop-up at 3 premium malls (Delhi, Mumbai, Bengaluru) with live cooking demos. Partner with Sokhi for the Bengaluru event — media crossover from the collab. Capture UGC at pop-up for Meta top-of-funnel. Same investment, three times the content output.</div>
+          </div>
+        </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e0e0e0;">
+          <div style="font-size:17px;margin-bottom:10px;">🔁</div>
+          <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Retention & Brand — The Gifting Flywheel</div>
+          <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">Borosil is a gifting brand — Diwali, weddings, housewarmings. That's a natural retention and referral engine if the post-purchase experience matches the gifting occasion. Most kitchenware brands ignore what happens after the box is opened.</div>
+          <div style="background:#E8EDF5;border-radius:8px;padding:14px;border-left:2px solid #2C4A8A;">
+            <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A8A;margin-bottom:6px;">Campaign Brief</div>
+            <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Post-purchase WhatsApp: "Your Borosil arrived. Here's a recipe that shows off what you just bought." — Activate the product experience. Gifting season (Diwali): "Gift a kitchen upgrade" referral — ₹200 credit for sender, 10% off for recipient. Target K-factor 0.25.</div>
+          </div>
+        </div>
+    </div>
+    <div style="background:#1A1A1A;border-radius:14px;padding:32px;margin-top:8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">My POV · The Integrating Principle</div>
+      <p style="font-size:15px;font-style:italic;font-family:'Playfair Display',serif;color:rgba(255,255,255,0.85);line-height:1.65;max-width:800px;">Borosil's 19-month integrated function taught me one thing above all: coherence is harder to manufacture than any individual result. The Sokhi campaign worked because the Amazon listing, the trade video, and the in-store asset were one sentence. The next layer to build — and what was missing — is a unified Marketing Mix Model that isolates which channels are pulling weight and which are just busy. You can't optimise what you can't attribute.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

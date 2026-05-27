@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AIOS — AI Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080C;
+  --bg2:#0A0D14;
+  --bg3:#0E1219;
+  --bg4:#141820;
+  --border:rgba(255,255,255,0.055);
+  --border2:rgba(255,255,255,0.09);
+  --text:rgba(255,255,255,0.9);
+  --text2:rgba(255,255,255,0.6);
+  --text3:rgba(255,255,255,0.35);
+  --accent:#6EE7C7;
+  --accent2:#7C6FFF;
+  --red:#FF6B6B;
+  --gold:#F5C842;
+  --blue:#4EABF8;
+  --purple:#A78BFA;
+  --orange:#FB923C;
+  --pink:#F472B6;
+  --sidebar-w:230px;
+  --shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+:root.light{
+  --bg:#F0F2F5;
+  --bg2:#FFFFFF;
+  --bg3:#F7F8FA;
+  --bg4:#ECEEF2;
+  --border:rgba(0,0,0,0.08);
+  --border2:rgba(0,0,0,0.14);
+  --text:rgba(0,0,0,0.88);
+  --text2:rgba(0,0,0,0.55);
+  --text3:rgba(0,0,0,0.35);
+  --accent:#0E9E7E;
+  --accent2:#5B4ECC;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;overflow:hidden}
+
+/* THEME TOGGLE */
+#theme-toggle{
+  display:flex;align-items:center;gap:6px;
+  padding:5px 10px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--border2);background:var(--bg3);
+  color:var(--text2);font-size:12px;font-weight:500;
+  transition:all 0.2s ease;white-space:nowrap;flex-shrink:0;
+}
+#theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+#theme-toggle .theme-icon{font-size:14px}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(128,128,128,0.15);border-radius:2px}
+
+/* LAYOUT */
+#shell{display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+#sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--bg2);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:relative;z-index:50;
+  transition:width 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.sb-logo{
+  padding:20px 18px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.sb-logo-mark{
+  width:30px;height:30px;border-radius:7px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-family:'Syne',sans-serif;font-weight:800;color:#fff;
+  box-shadow:0 0 12px rgba(110,231,199,0.2);
+}
+.sb-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.04em;color:var(--text)}
+.sb-logo-sub{font-size:9px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+
+nav{flex:1;padding:10px 8px;overflow-y:auto;overflow-x:hidden}
+.nav-section-label{
+  font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--text3);font-family:'JetBrains Mono',monospace;
+  padding:12px 10px 6px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:8px;cursor:pointer;
+  transition:background 0.15s ease;white-space:nowrap;position:relative;
+}
+.nav-item:hover{background:rgba(128,128,128,0.07)}
+.nav-item.active{background:rgba(110,231,199,0.08)}
+.nav-item.active::before{
+  content:'';position:absolute;left:0;top:25%;bottom:25%;
+  width:2px;border-radius:1px;background:var(--accent);
+  box-shadow:0 0 6px var(--accent);
+}
+.nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.nav-label{font-size:13.5px;font-weight:500;color:var(--text2)}
+.nav-item.active .nav-label{color:var(--text)}
+.nav-badge{
+  margin-left:auto;font-size:10px;font-family:'JetBrains Mono',monospace;
+  padding:2px 7px;border-radius:4px;
+  background:rgba(128,128,128,0.1);color:var(--text3);
+}
+.sb-footer{
+  padding:14px 12px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.sb-avatar{
+  width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,#7C6FFF,#F472B6);
+  flex-shrink:0;
+}
+.sb-user-text p:first-child{font-size:11px;font-weight:600;color:var(--text)}
+.sb-user-text p:last-child{font-size:10px;color:var(--text3)}
+.sb-status{margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 5px var(--accent)}
+
+/* MAIN */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+
+/* TOP BAR */
+#topbar{
+  height:52px;flex-shrink:0;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+  padding:0 24px;background:var(--bg2);
+}
+.page-breadcrumb{
+  display:flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text3);
+}
+.page-breadcrumb span.cur{color:var(--text2)}
+.page-breadcrumb .sep{color:var(--text3)}
+.tb-spacer{flex:1}
+#global-search-wrap{
+  position:relative;
+  display:flex;align-items:center;
+}
+#global-search{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;padding:8px 14px 8px 36px;
+  font-size:13px;color:var(--text);width:260px;
+  transition:all 0.2s ease;font-family:'Inter',sans-serif;
+  outline:none;
+}
+#global-search:focus{border-color:var(--border2);width:320px;background:var(--bg4)}
+#global-search::placeholder{color:var(--text3)}
+.search-icon{position:absolute;left:11px;font-size:13px;color:var(--text3);pointer-events:none}
+.tb-kbd{
+  font-size:11px;font-family:'JetBrains Mono',monospace;
+  padding:4px 8px;border-radius:5px;
+  border:1px solid var(--border);color:var(--text3);
+  white-space:nowrap;cursor:pointer;
+}
+
+/* CONTENT */
+#content{flex:1;overflow:hidden;position:relative}
+
+/* PAGES — each fills its own isolated viewport */
+.page{
+  display:none;
+  position:absolute;inset:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  background:var(--bg);
+}
+.page.active{display:block}
+
+/* ─── DASHBOARD PAGE ─── */
+#page-dashboard{padding:28px 32px}
+
+.dash-hero{margin-bottom:32px}
+.dash-hello{
+  font-family:'Syne',sans-serif;
+  font-size:34px;font-weight:800;
+  letter-spacing:-0.03em;color:var(--text);
+  line-height:1.15;margin-bottom:8px;
+}
+.dash-hello span{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.dash-sub{font-size:14px;color:var(--text2);line-height:1.5}
+
+/* TASK LAUNCHER */
+.section-label{
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text3);font-family:'JetBrains Mono',monospace;
+  margin-bottom:14px;
+}
+.task-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;
+  margin-bottom:36px;
+}
+.task-chip{
+  padding:14px 16px;border-radius:10px;cursor:pointer;
+  background:var(--bg3);border:1px solid var(--border);
+  transition:all 0.2s ease;position:relative;overflow:hidden;
+}
+.task-chip::before{
+  content:'';position:absolute;inset:0;
+  background:var(--chip-glow,transparent);opacity:0;
+  transition:opacity 0.3s ease;
+}
+.task-chip:hover::before{opacity:1}
+.task-chip:hover{border-color:var(--border2);transform:translateY(-1px)}
+.task-chip-icon{font-size:20px;margin-bottom:8px;display:block}
+.task-chip-label{font-size:13px;font-weight:600;color:var(--text);font-family:'Syne',sans-serif}
+.task-chip-count{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-top:3px}
+
+/* PINNED WORKFLOWS */
+.workflow-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:36px}
+.wf-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:12px;padding:18px 18px 14px;cursor:pointer;
+  transition:all 0.2s ease;
+}
+.wf-card:hover{border-color:var(--border2);transform:translateY(-1px);background:var(--bg4)}
+.wf-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.wf-card-icon{font-size:20px}
+.wf-card-time{
+  font-size:9px;font-family:'JetBrains Mono',monospace;
+  color:var(--text3);background:var(--bg4);
+  padding:3px 7px;border-radius:4px;border:1px solid var(--border);
+}
+.wf-card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
+.wf-card-desc{font-size:12.5px;color:var(--text2);line-height:1.55;margin-bottom:12px}
+.wf-tool-chips{display:flex;flex-wrap:wrap;gap:5px}
+.wf-tool-chip{
+  font-size:11px;padding:3px 8px;border-radius:4px;
+  background:rgba(128,128,128,0.08);color:var(--text2);
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* QUICK STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px}
+.stat-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:16px 18px;
+}
+.stat-num{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:var(--text);line-height:1}
+.stat-label{font-size:12px;color:var(--text2);margin-top:5px}
+.stat-sub{font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-top:7px}
+
+/* ─── WORKFLOWS PAGE ─── */
+#page-workflows{}
+.wf-header{margin-bottom:28px}
+.wf-header h1{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:8px}
+.wf-header p{font-size:14px;color:var(--text2);line-height:1.55}
+
+.wf-list{display:flex;flex-direction:column;gap:16px}
+.wf-row{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;cursor:pointer;
+  transition:border-color 0.2s ease;
+}
+.wf-row:hover{border-color:var(--border2)}
+.wf-row-head{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 24px;
+}
+.wf-row-num{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--text3);width:26px;flex-shrink:0;
+}
+.wf-row-info{flex:1}
+.wf-row-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+.wf-row-meta{font-size:12px;color:var(--text2);line-height:1.4;white-space:normal;word-break:break-word}
+.wf-row-time{
+  font-size:11px;font-family:'JetBrains Mono',monospace;
+  color:var(--text3);background:var(--bg4);
+  padding:5px 11px;border-radius:5px;border:1px solid var(--border);white-space:nowrap;
+}
+.wf-row-toggle{color:var(--text3);font-size:13px;transition:transform 0.2s ease}
+.wf-row.open .wf-row-toggle{transform:rotate(180deg)}
+
+.wf-expand{
+  display:none;border-top:1px solid var(--border);
+  padding:24px;background:var(--bg2);
+}
+.wf-row.open .wf-expand{display:block}
+
+/* FLOW DIAGRAM */
+.flow-diagram{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin-bottom:24px;overflow-x:auto;padding-bottom:8px}
+.flow-node{
+  display:flex;flex-direction:column;gap:3px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:12px 16px;min-width:100px;flex-shrink:0;
+  transition:border-color 0.2s ease;
+}
+.flow-node:hover{border-color:var(--border2)}
+.flow-node-step{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase}
+.flow-node-tool{font-family:'Syne',sans-serif;font-size:14px;font-weight:700}
+.flow-node-action{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.4}
+.flow-arrow{padding:0 6px;color:var(--text3);font-size:16px;flex-shrink:0}
+
+.wf-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.wf-meta-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px}
+.wf-meta-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
+.wf-meta-list{display:flex;flex-direction:column;gap:6px}
+.wf-meta-item{font-size:13px;color:var(--text2);display:flex;align-items:flex-start;gap:6px;line-height:1.4}
+.wf-meta-item::before{content:'→';color:var(--accent);flex-shrink:0;font-size:12px}
+
+/* ─── TOOL LIBRARY PAGE ─── */
+#page-tools{overflow:hidden}
+#page-tools.active{display:flex;flex-direction:column}
+.tools-topbar{
+  padding:20px 32px 16px;flex-shrink:0;
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+}
+.tools-topbar h1{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--text);margin-bottom:14px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap}
+.filter-chip{
+  font-size:12px;padding:6px 14px;border-radius:20px;cursor:pointer;
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text2);transition:all 0.15s ease;font-weight:500;white-space:nowrap;
+}
+.filter-chip:hover{border-color:var(--border2);color:var(--text)}
+.filter-chip.active{background:rgba(110,231,199,0.1);border-color:rgba(110,231,199,0.35);color:var(--accent)}
+
+.tools-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:24px 32px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;align-content:start}
+
+.tool-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:12px;overflow:visible;cursor:pointer;
+  transition:all 0.2s cubic-bezier(0.4,0,0.2,1);
+  align-self:start;
+}
+.tool-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.15)}
+.tc-head{padding:18px 20px 12px;display:flex;align-items:flex-start;gap:12px}
+.tc-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.tc-info{flex:1;min-width:0}
+.tc-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--text);margin-bottom:3px}
+.tc-summary{font-size:12.5px;color:var(--text2);line-height:1.45}
+.tc-badges{display:flex;gap:5px;flex-wrap:wrap;padding:0 20px 14px;overflow:hidden}
+.tc-badge{
+  font-size:11px;padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono',monospace;
+  border:1px solid transparent;font-weight:500;
+}
+.tc-body{padding:0 20px 18px;display:none}
+.tool-card.open .tc-body{display:block}
+.tc-section{margin-bottom:14px}
+.tc-sec-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+.tc-sec-list{display:flex;flex-direction:column;gap:5px}
+.tc-sec-item{font-size:12.5px;color:var(--text2);display:flex;align-items:flex-start;gap:7px;line-height:1.45}
+.tc-sec-item.green::before{content:'✓';color:#4ade80;flex-shrink:0}
+.tc-sec-item.red::before{content:'✗';color:#f87171;flex-shrink:0}
+.tc-sec-item.arrow::before{content:'→';color:var(--accent);flex-shrink:0}
+.tc-divider{height:1px;background:var(--border);margin:0 0 0}
+.tc-footer{padding:12px 20px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--border)}
+.tc-link{
+  flex:1;text-align:center;font-size:12px;font-weight:600;
+  padding:9px;border-radius:7px;text-decoration:none;
+  border:1px solid var(--border);color:var(--text2);
+  transition:all 0.15s ease;font-family:'Syne',sans-serif;
+}
+.tc-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(110,231,199,0.05)}
+.tc-expand-btn{
+  font-size:13px;color:var(--text3);transition:all 0.2s ease;
+  background:none;border:none;cursor:pointer;padding:5px 8px;
+  border-radius:6px;line-height:1;
+}
+.tc-expand-btn:hover{background:var(--bg4);color:var(--text2)}
+.tool-card.open .tc-expand-btn{color:var(--accent)}
+
+#page-ecosystem{overflow:hidden}
+#page-ecosystem.active{display:flex;flex-direction:column}
+.eco-header{padding:24px 32px 20px;flex-shrink:0;border-bottom:1px solid var(--border)}
+.eco-header h1{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--text);margin-bottom:5px}
+.eco-header p{font-size:13.5px;color:var(--text2);line-height:1.5}
+#eco-canvas-wrap{flex:1;position:relative;overflow:hidden}
+#eco-canvas{width:100%;height:100%}
+.eco-tooltip{
+  position:absolute;background:var(--bg2);border:1px solid var(--border2);
+  border-radius:10px;padding:12px 16px;pointer-events:none;opacity:0;
+  transition:opacity 0.15s ease;max-width:200px;z-index:10;
+}
+.eco-tt-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.eco-tt-role{font-size:11px;color:var(--text2);margin-bottom:6px}
+.eco-tt-connects{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+
+/* ─── SEARCH OVERLAY ─── */
+#search-overlay{
+  position:fixed;inset:0;background:rgba(6,8,12,0.85);
+  backdrop-filter:blur(8px);z-index:200;
+  display:none;align-items:flex-start;justify-content:center;padding-top:100px;
+}
+#search-overlay.open{display:flex}
+#search-modal{
+  width:100%;max-width:580px;
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,0.6);
+}
+.sm-input-wrap{
+  display:flex;align-items:center;gap:10px;
+  padding:16px 20px;border-bottom:1px solid var(--border);
+}
+.sm-search-icon{font-size:16px;color:var(--text3)}
+#sm-input{
+  flex:1;background:none;border:none;outline:none;
+  font-size:16px;color:var(--text);font-family:'Inter',sans-serif;
+}
+#sm-input::placeholder{color:var(--text3)}
+.sm-kbd{font-size:10px;font-family:'JetBrains Mono',monospace;padding:3px 7px;border-radius:4px;border:1px solid var(--border);color:var(--text3)}
+#sm-results{max-height:380px;overflow-y:auto;padding:8px}
+.sm-result{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 12px;border-radius:8px;cursor:pointer;
+  transition:background 0.12s ease;
+}
+.sm-result:hover,.sm-result.selected{background:var(--bg4)}
+.sm-result-icon{
+  width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;flex-shrink:0;
+}
+.sm-result-info{flex:1}
+.sm-result-name{font-size:14px;font-weight:600;color:var(--text)}
+.sm-result-type{font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+.sm-result-arrow{font-size:12px;color:var(--text3)}
+.sm-empty{padding:32px;text-align:center;color:var(--text3);font-size:14px}
+.sm-section-header{
+  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text3);font-family:'JetBrains Mono',monospace;
+  padding:8px 12px 4px;
+}
+
+/* UTILITY */
+.hide{display:none!important}
+a{color:inherit;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div id="shell">
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">⬡</div>
+      <div>
+        <div class="sb-logo-text">AIOS</div>
+        <div class="sb-logo-sub">AI Operating System</div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-section-label">CORE</div>
+      <div class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">◈</span>
+        <span class="nav-label">Command Center</span>
+      </div>
+      <div class="nav-item" data-page="workflows">
+        <span class="nav-icon">⟿</span>
+        <span class="nav-label">Workflow Playbooks</span>
+        <span class="nav-badge">6</span>
+      </div>
+      <div class="nav-item" data-page="tools">
+        <span class="nav-icon">⬡</span>
+        <span class="nav-label">Tool Library</span>
+        <span class="nav-badge">27</span>
+      </div>
+      <div class="nav-item" data-page="ecosystem">
+        <span class="nav-icon">◎</span>
+        <span class="nav-label">Ecosystem Map</span>
+      </div>
+
+      <div class="nav-section-label" style="margin-top:8px">QUICK ACCESS</div>
+      <div class="nav-item" data-action="think">
+        <span class="nav-icon" style="color:#A78BFA">◉</span>
+        <span class="nav-label">Think / Strategy</span>
+      </div>
+      <div class="nav-item" data-action="build">
+        <span class="nav-icon" style="color:#4EABF8">⬡</span>
+        <span class="nav-label">Build</span>
+      </div>
+      <div class="nav-item" data-action="creative">
+        <span class="nav-icon" style="color:#F472B6">✦</span>
+        <span class="nav-label">Creative</span>
+      </div>
+      <div class="nav-item" data-action="automation">
+        <span class="nav-icon" style="color:#FB923C">⟳</span>
+        <span class="nav-label">Automation</span>
+      </div>
+      <div class="nav-item" data-action="infra">
+        <span class="nav-icon" style="color:#6EE7C7">▣</span>
+        <span class="nav-label">Infrastructure</span>
+      </div>
+      <div class="nav-item" data-action="growth">
+        <span class="nav-icon" style="color:#F5C842">↗</span>
+        <span class="nav-label">Growth / PMM</span>
+      </div>
+    </nav>
+
+    <div class="sb-footer">
+      <div class="sb-avatar"></div>
+      <div class="sb-user-text">
+        <p>Nisha</p>
+        <p>PMM + Builder</p>
+      </div>
+      <div class="sb-status" title="All systems operational"></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main id="main">
+
+    <!-- TOPBAR -->
+    <div id="topbar">
+      <div class="page-breadcrumb">
+        <span>AIOS</span>
+        <span class="sep">/</span>
+        <span class="cur" id="breadcrumb-cur">Command Center</span>
+      </div>
+      <div class="tb-spacer"></div>
+      <div id="global-search-wrap">
+        <span class="search-icon">⌕</span>
+        <input id="global-search" type="text" placeholder="Search tools, workflows, use cases…" readonly/>
+      </div>
+      <div class="tb-kbd" id="cmd-k-hint">⌘K</div>
+      <button id="theme-toggle" title="Toggle light/dark mode">
+        <span class="theme-icon">☀️</span>
+        <span id="theme-label">Light</span>
+      </button>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="content">
+
+      <!-- DASHBOARD PAGE -->
+      <div class="page active" id="page-dashboard">
+        <div style="padding:28px 32px;max-width:1300px;margin:0 auto">
+
+          <div class="dash-hero">
+            <div class="dash-hello">What are you<br/><span>building today?</span></div>
+            <div class="dash-sub">Select a task to get your workflow, tools, and sequence instantly.</div>
+          </div>
+
+          <div class="section-label">QUICK TASK LAUNCH</div>
+          <div class="task-grid" id="task-grid"></div>
+
+          <div class="section-label">PINNED WORKFLOWS</div>
+          <div class="workflow-cards" id="pinned-workflows"></div>
+
+          <div class="section-label">YOUR STACK AT A GLANCE</div>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-num">27</div>
+              <div class="stat-label">Tools in your OS</div>
+              <div class="stat-sub">↑ 4 new this quarter</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">6</div>
+              <div class="stat-label">Workflow Playbooks</div>
+              <div class="stat-sub">Ready to execute</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">6</div>
+              <div class="stat-label">Tool categories</div>
+              <div class="stat-sub">Fully mapped</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">∞</div>
+              <div class="stat-label">Combinations</div>
+              <div class="stat-sub">Cross-stack power</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- WORKFLOWS PAGE -->
+      <div class="page" id="page-workflows">
+        <div style="padding:28px 32px">
+        <div class="wf-header">
+          <h1>Workflow Playbooks</h1>
+          <p>Step-by-step tool sequences for your most important work. Each playbook tells you what to use, why, and in what order.</p>
+        </div>
+        <div class="wf-list" id="wf-list"></div>
+        </div>
+      </div>
+
+      <!-- TOOL LIBRARY PAGE -->
+      <div class="page" id="page-tools">
+        <div class="tools-topbar">
+          <h1>Tool Library</h1>
+          <div class="filter-bar" id="filter-bar"></div>
+        </div>
+        <div class="tools-body" id="tools-body"></div>
+      </div>
+
+      <!-- ECOSYSTEM MAP PAGE -->
+      <div class="page" id="page-ecosystem">
+        <div class="eco-header">
+          <h1>AI Ecosystem Map</h1>
+          <p>Visual relationship graph — see how every tool connects, and how data flows across your stack. Hover a node to explore.</p>
+        </div>
+        <div id="eco-canvas-wrap">
+          <canvas id="eco-canvas"></canvas>
+          <div class="eco-tooltip" id="eco-tooltip">
+            <div class="eco-tt-name" id="eco-tt-name"></div>
+            <div class="eco-tt-role" id="eco-tt-role"></div>
+            <div class="eco-tt-connects" id="eco-tt-connects"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay">
+  <div id="search-modal">
+    <div class="sm-input-wrap">
+      <span class="sm-search-icon">⌕</span>
+      <input id="sm-input" type="text" placeholder="Search tools, workflows, use cases, categories…" autofocus/>
+      <span class="sm-kbd">ESC</span>
+    </div>
+    <div id="sm-results"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA LAYER
+// ═══════════════════════════════════════════════════════
+
+const TOOLS = [
+  {id:"chatgpt",name:"ChatGPT",category:"think",summary:"Primary strategic thinking engine",role:"Brainstorming, campaign planning, PMM strategy, synthesis",
+   useCases:["Campaign planning","Positioning strategy","Idea generation","PMM frameworks","Synthesis of complex info"],
+   avoidWhen:["Deep long-form docs (use Claude)","Real-time web research (use Perplexity)"],
+   strengths:["Best-in-class reasoning","Huge context","Flexible outputs","Plugin ecosystem"],
+   weaknesses:["Less precise than Claude for structured docs","No real-time data by default"],
+   pricing:"$$",difficulty:"Beginner",color:"#A78BFA",
+   workflows:["LinkedIn Thought Leadership","Product Launch","UGC Ad Creation","Competitor Research","AI App MVP","Meeting Intelligence"],
+   alternatives:["Claude","Perplexity"],href:"https://chat.openai.com",
+   integrates:["claude","perplexity","midjourney","supergrow","n8n"]},
+
+  {id:"claude",name:"Claude",category:"think",summary:"Deep reasoning + structured writing",role:"Long docs, frameworks, PRDs, editing, messaging, analysis",
+   useCases:["PRD writing","Long-form analysis","Editing and messaging","Frameworks","Structured research"],
+   avoidWhen:["Quick ideation (use ChatGPT)","Real-time info (use Perplexity)"],
+   strengths:["Best structured output","Deep reasoning","Nuanced writing","Long context"],
+   weaknesses:["Slower for rapid fire ideation"],
+   pricing:"$$",difficulty:"Beginner",color:"#A78BFA",
+   workflows:["LinkedIn Thought Leadership","Competitor Research","Product Launch"],
+   alternatives:["ChatGPT"],href:"https://claude.ai",
+   integrates:["chatgpt","perplexity","notebooklm"]},
+
+  {id:"perplexity",name:"Perplexity",category:"think",summary:"AI-native research engine with real-time web",role:"Competitor research, market trends, sourcing, current information",
+   useCases:["Competitor research","Trend analysis","Fact-checking","Market sizing","Source-grounded answers"],
+   avoidWhen:["Long-form strategic writing","Creative content generation"],
+   strengths:["Real-time web data","Source citations","Fast","Free tier"],
+   weaknesses:["Shallow reasoning vs Claude","No content generation"],
+   pricing:"$",difficulty:"Beginner",color:"#A78BFA",
+   workflows:["LinkedIn Thought Leadership","Competitor Research","Product Launch"],
+   alternatives:["ChatGPT","NotebookLM"],href:"https://perplexity.ai",
+   integrates:["claude","chatgpt","notebooklm"]},
+
+  {id:"notebooklm",name:"NotebookLM",category:"think",summary:"Knowledge intelligence system for your own sources",role:"PDF analysis, transcript synthesis, source-grounded research",
+   useCases:["Analyze uploaded PDFs","Customer interview synthesis","Transcript analysis","Q&A over your docs"],
+   avoidWhen:["General web research (use Perplexity)","Creative tasks"],
+   strengths:["100% grounded in your sources","No hallucination risk","Free","Audio summaries"],
+   weaknesses:["Only works on uploaded docs","Limited to Google ecosystem"],
+   pricing:"Free",difficulty:"Beginner",color:"#A78BFA",
+   workflows:["Competitor Research","Meeting Intelligence"],
+   alternatives:["Perplexity","Claude"],href:"https://notebooklm.google.com",
+   integrates:["claude","chatgpt","fireflies"]},
+
+  {id:"cursor",name:"Cursor",category:"build",summary:"Primary AI coding IDE with repo-wide intelligence",role:"Coding, debugging, architecture, repo-wide edits",
+   useCases:["Full codebase AI editing","Debugging","Architecture planning","Writing tests","Code review"],
+   avoidWhen:["Quick MVPs with no existing codebase (use Replit)","Frontend-only UI gen (use v0)"],
+   strengths:["Best AI-native IDE","Repo-wide context","Tab autocomplete","Multi-file edits"],
+   weaknesses:["Requires local setup","Learning curve for non-devs"],
+   pricing:"$$",difficulty:"Intermediate",color:"#4EABF8",
+   workflows:["AI App MVP"],
+   alternatives:["Replit","v0"],href:"https://cursor.sh",
+   integrates:["v0","supabase","vercel","replit"]},
+
+  {id:"replit",name:"Replit",category:"build",summary:"Rapid prototyping + instant deployment",role:"MVPs, experiments, demos, quick launches",
+   useCases:["No-setup app prototyping","Sharing live demos","Full-stack experiments","Deploying quickly"],
+   avoidWhen:["Production-grade code (use Cursor)","Complex repos"],
+   strengths:["Zero setup","Instant deployment","Collaboration","AI agent built-in"],
+   weaknesses:["Not for production codebases","Performance limits on free tier"],
+   pricing:"$$",difficulty:"Beginner",color:"#4EABF8",
+   workflows:["AI App MVP"],
+   alternatives:["Cursor","v0"],href:"https://replit.com",
+   integrates:["cursor","supabase","vercel","stripe"]},
+
+  {id:"v0",name:"v0",category:"build",summary:"Frontend & UI generation via prompt",role:"Landing pages, React components, frontend systems",
+   useCases:["Landing page generation","React component design","UI mockups from text","Rapid frontend prototyping"],
+   avoidWhen:["Backend logic","Full app development"],
+   strengths:["Fastest UI output","React-native","No design skills needed","Free tier"],
+   weaknesses:["Frontend only","Needs developer to integrate"],
+   pricing:"$",difficulty:"Beginner",color:"#4EABF8",
+   workflows:["Product Launch","AI App MVP"],
+   alternatives:["Replit","Cursor"],href:"https://v0.dev",
+   integrates:["cursor","replit","vercel","supabase"]},
+
+  {id:"midjourney",name:"Midjourney",category:"creative",summary:"High-end AI image generation",role:"Branding, visual concepts, moodboards",
+   useCases:["Brand visuals","Campaign concepts","Moodboards","Thumbnails","Social graphics"],
+   avoidWhen:["Text-in-image (use DALL·E)","Precise edits"],
+   strengths:["Highest aesthetic quality","Style consistency","Community prompt library"],
+   weaknesses:["Discord-only (historically)","Can't edit existing images"],
+   pricing:"$$",difficulty:"Intermediate",color:"#F472B6",
+   workflows:["LinkedIn Thought Leadership","Product Launch"],
+   alternatives:["DALL·E","Ideogram"],href:"https://midjourney.com",
+   integrates:["chatgpt","capcut","runway"]},
+
+  {id:"runway",name:"Runway",category:"creative",summary:"AI video generation and editing",role:"Ads, motion graphics, short-form content",
+   useCases:["Image-to-video","Text-to-video","Video effects","Ad production","Motion from stills"],
+   avoidWhen:["Long-form video editing (use CapCut)","Talking head videos (use HeyGen)"],
+   strengths:["Best-in-class video AI","Gen-3 model","Professional results"],
+   weaknesses:["Expensive credits","Short clip lengths"],
+   pricing:"$$$",difficulty:"Intermediate",color:"#F472B6",
+   workflows:["UGC Ad Creation","Product Launch"],
+   alternatives:["HeyGen","CapCut"],href:"https://runwayml.com",
+   integrates:["elevenlabs","capcut","heygen","midjourney"]},
+
+  {id:"elevenlabs",name:"ElevenLabs",category:"creative",summary:"Hyper-realistic AI voice synthesis",role:"Narration, voiceovers, multilingual audio",
+   useCases:["Video voiceovers","Podcast narration","Voice cloning","Multilingual content"],
+   avoidWhen:["Real human authenticity needed","Live conversations"],
+   strengths:["Most realistic AI voices","Voice cloning","70+ languages","API-friendly"],
+   weaknesses:["Expensive at scale","Emotional range limitations"],
+   pricing:"$$",difficulty:"Beginner",color:"#F472B6",
+   workflows:["UGC Ad Creation","Product Launch"],
+   alternatives:["Murf AI","HeyGen"],href:"https://elevenlabs.io",
+   integrates:["heygen","runway","capcut","n8n"]},
+
+  {id:"heygen",name:"HeyGen",category:"creative",summary:"Avatar video generation at scale",role:"Talking head content, explainers, localization",
+   useCases:["Faceless video content","Product explainers","Personalized video at scale","Avatar creation"],
+   avoidWhen:["High-motion video (use Runway)","Audio-only (use ElevenLabs)"],
+   strengths:["Best AI avatars","Video translation","Scale personalization","Studio quality"],
+   weaknesses:["Expensive","Uncanny valley risk"],
+   pricing:"$$$",difficulty:"Beginner",color:"#F472B6",
+   workflows:["UGC Ad Creation"],
+   alternatives:["Runway","ElevenLabs"],href:"https://heygen.com",
+   integrates:["elevenlabs","capcut","runway"]},
+
+  {id:"capcut",name:"CapCut",category:"creative",summary:"Social-first video editing & repurposing",role:"Social edits, repurposing, formatting",
+   useCases:["Vertical video editing","Auto captions","Template-based edits","Repurposing long content"],
+   avoidWhen:["Professional production (use Runway)","Avatar videos (use HeyGen)"],
+   strengths:["Free","Fast","Templates","AI auto-captions","Mobile-friendly"],
+   weaknesses:["Limited pro features","TikTok-owned"],
+   pricing:"Free",difficulty:"Beginner",color:"#F472B6",
+   workflows:["LinkedIn Thought Leadership","UGC Ad Creation"],
+   alternatives:["Runway","HeyGen"],href:"https://capcut.com",
+   integrates:["heygen","runway","elevenlabs","midjourney"]},
+
+  {id:"suno",name:"Suno",category:"creative",summary:"Full-song AI music generation",role:"Jingles, branded music, background audio",
+   useCases:["Ad jingles","Background music","Brand audio identity","Podcast intros"],
+   avoidWhen:["Live instrument recording","Licensed music (use Spotify/stock)"],
+   strengths:["Full songs from text","Genre variety","Fast","Free tier"],
+   weaknesses:["Copyright grey area","Quality inconsistent"],
+   pricing:"$",difficulty:"Beginner",color:"#F472B6",
+   workflows:["UGC Ad Creation"],
+   alternatives:["Udio","Epidemic Sound"],href:"https://suno.ai",
+   integrates:["capcut","runway","elevenlabs"]},
+
+  {id:"chronicle",name:"Chronicle",category:"creative",summary:"Presentation storytelling platform",role:"Decks, PMM storytelling, presentations",
+   useCases:["Product launch decks","PMM presentations","Investor storytelling","Visual narratives"],
+   avoidWhen:["Data-heavy slides (use PowerPoint)","Quick reference (use Notion)"],
+   strengths:["Beautiful output","Story-first design","Animations","Collaboration"],
+   weaknesses:["Less customization than traditional tools","Newer product"],
+   pricing:"$$",difficulty:"Beginner",color:"#F472B6",
+   workflows:["Product Launch"],
+   alternatives:["Gamma","Beautiful.ai"],href:"https://chroniclehq.com",
+   integrates:["chatgpt","claude","midjourney"]},
+
+  {id:"n8n",name:"n8n",category:"automation",summary:"Visual workflow automation system",role:"Automations, triggers, integrations, pipelines",
+   useCases:["Connect 400+ tools","Multi-step automations","Webhook triggers","Data pipelines","AI agent orchestration"],
+   avoidWhen:["Simple single-step zaps (use Zapier)","Pure coding (use Cursor)"],
+   strengths:["Self-hostable","Open source","Visual builder","Code nodes","AI-native"],
+   weaknesses:["Steeper learning curve than Zapier","Debugging complex flows"],
+   pricing:"$",difficulty:"Intermediate",color:"#FB923C",
+   workflows:["Meeting Intelligence"],
+   alternatives:["Zapier","Make"],href:"https://n8n.io",
+   integrates:["chatgpt","claude","supabase","fireflies","vapi","elevenlabs"]},
+
+  {id:"vapi",name:"Vapi",category:"automation",summary:"Voice AI agent infrastructure",role:"AI callers, voice assistants, conversational AI",
+   useCases:["Outbound AI calls","Voice customer support","Appointment scheduling","Conversational AI apps"],
+   avoidWhen:["Text-only workflows","Basic voice notes (use Wispr Flow)"],
+   strengths:["Real-time voice AI","Low latency","Custom voices","API-first"],
+   weaknesses:["Complex setup","Usage costs at scale"],
+   pricing:"$$",difficulty:"Advanced",color:"#FB923C",
+   workflows:[],
+   alternatives:["ElevenLabs","Bland AI"],href:"https://vapi.ai",
+   integrates:["elevenlabs","n8n","supabase"]},
+
+  {id:"fireflies",name:"Fireflies.ai",category:"automation",summary:"Meeting intelligence and transcript system",role:"Transcripts, summaries, action items, call analysis",
+   useCases:["Auto-transcribe meetings","Extract action items","Search past calls","Share meeting summaries"],
+   avoidWhen:["Non-meeting voice content (use Wispr Flow)","Deep document analysis (use NotebookLM)"],
+   strengths:["Auto-joins calls","Speaker labels","Search across transcripts","CRM integrations"],
+   weaknesses:["Accuracy varies by audio quality","Privacy considerations"],
+   pricing:"$$",difficulty:"Beginner",color:"#FB923C",
+   workflows:["Meeting Intelligence"],
+   alternatives:["Otter.ai","Grain"],href:"https://fireflies.ai",
+   integrates:["notebooklm","chatgpt","n8n"]},
+
+  {id:"wispr",name:"Wispr Flow",category:"automation",summary:"Voice-to-text productivity layer",role:"Dictation, fast writing, thought capture",
+   useCases:["Voice-based writing","Anywhere dictation","Meeting note capture","Hands-free workflows"],
+   avoidWhen:["Recorded meetings (use Fireflies)","Scripted voiceovers (use ElevenLabs)"],
+   strengths:["Works in any app","Fast","Accurate","Background mode"],
+   weaknesses:["Mac-only currently","No transcription for calls"],
+   pricing:"$",difficulty:"Beginner",color:"#FB923C",
+   workflows:[],
+   alternatives:["Fireflies","Otter.ai"],href:"https://wisprflow.com",
+   integrates:["chatgpt","claude","fireflies"]},
+
+  {id:"supabase",name:"Supabase",category:"infra",summary:"Open-source backend infrastructure",role:"Auth, storage, databases, real-time",
+   useCases:["User authentication","Database management","File storage","Real-time subscriptions","REST & GraphQL APIs"],
+   avoidWhen:["Non-app projects","Pure static sites (use Vercel only)"],
+   strengths:["Postgres-native","Open source","Free tier generous","Edge functions","Real-time"],
+   weaknesses:["Not serverless by default","Can get complex at scale"],
+   pricing:"$",difficulty:"Intermediate",color:"#6EE7C7",
+   workflows:["AI App MVP"],
+   alternatives:["Firebase","PlanetScale"],href:"https://supabase.com",
+   integrates:["vercel","cursor","replit","n8n","stripe"]},
+
+  {id:"vercel",name:"Vercel",category:"infra",summary:"Frontend deployment and edge hosting",role:"Hosting, frontend deployment, serverless",
+   useCases:["Deploy Next.js apps","Preview deployments","Serverless functions","Edge caching","Analytics"],
+   avoidWhen:["Backend-heavy apps (use Supabase)","Full-stack PaaS needs"],
+   strengths:["Best DX for frontend","Instant previews","Edge network","Next.js native"],
+   weaknesses:["Can get expensive","Vendor lock-in risk"],
+   pricing:"$$",difficulty:"Beginner",color:"#6EE7C7",
+   workflows:["Product Launch","AI App MVP"],
+   alternatives:["Netlify","Railway"],href:"https://vercel.com",
+   integrates:["supabase","stripe","cursor","v0","replit"]},
+
+  {id:"stripe",name:"Stripe",category:"infra",summary:"Payments and monetization infrastructure",role:"Subscriptions, checkout, billing",
+   useCases:["Accept payments","Subscription billing","Webhook events","Revenue reporting","Tax compliance"],
+   avoidWhen:["Non-commercial projects","Free tools"],
+   strengths:["Gold standard for payments","Best docs","Global","Instant payouts"],
+   weaknesses:["Complex for beginners","2.9%+30¢ fees"],
+   pricing:"Usage-based",difficulty:"Intermediate",color:"#6EE7C7",
+   workflows:["AI App MVP"],
+   alternatives:["Paddle","Lemon Squeezy"],href:"https://stripe.com",
+   integrates:["supabase","vercel","replit","n8n"]},
+
+  {id:"openrouter",name:"OpenRouter",category:"infra",summary:"Multi-model AI routing infrastructure",role:"Model routing, AI experimentation, cost optimization",
+   useCases:["Route to cheapest model","A/B test AI models","Access 100+ models via one API","Fallback logic"],
+   avoidWhen:["Single-model workflows","Non-technical users"],
+   strengths:["One API for all models","Usage analytics","Cost optimization","Open source models"],
+   weaknesses:["Extra latency hop","Complex for simple use cases"],
+   pricing:"Usage-based",difficulty:"Advanced",color:"#6EE7C7",
+   workflows:[],
+   alternatives:["Direct API","Ollama"],href:"https://openrouter.ai",
+   integrates:["cursor","n8n","supabase"]},
+
+  {id:"ollama",name:"Ollama",category:"infra",summary:"Local AI model inference",role:"Local models, offline AI, private inference",
+   useCases:["Run LLMs locally","Private data workflows","Offline inference","Zero API cost","Custom fine-tunes"],
+   avoidWhen:["Cloud deployment","Teams needing shared access"],
+   strengths:["Free to run","Private","No latency","Custom models"],
+   weaknesses:["Requires GPU/CPU power","Setup required","Smaller models"],
+   pricing:"Free",difficulty:"Advanced",color:"#6EE7C7",
+   workflows:[],
+   alternatives:["OpenRouter","Direct API"],href:"https://ollama.ai",
+   integrates:["cursor","n8n"]},
+
+  {id:"posthog",name:"PostHog",category:"infra",summary:"Open-source product analytics + intelligence",role:"Funnels, behavior tracking, retention analysis",
+   useCases:["User funnel analysis","Feature flag rollouts","Session recordings","A/B testing","Retention cohorts"],
+   avoidWhen:["Non-product analytics (use GA4)","Marketing attribution"],
+   strengths:["Open source","Self-hostable","All-in-one","SQL access","Free up to 1M events"],
+   weaknesses:["Complex dashboard","Overkill for simple landing pages"],
+   pricing:"$",difficulty:"Intermediate",color:"#6EE7C7",
+   workflows:["Product Launch"],
+   alternatives:["Mixpanel","Amplitude"],href:"https://posthog.com",
+   integrates:["vercel","supabase","n8n"]},
+
+  {id:"supergrow",name:"Supergrow",category:"growth",summary:"LinkedIn content growth engine",role:"Thought leadership, LinkedIn content scheduling",
+   useCases:["Carousel creation","Post scheduling","LinkedIn analytics","Content repurposing","Profile optimization"],
+   avoidWhen:["Non-LinkedIn platforms","Real-time engagement"],
+   strengths:["LinkedIn-native","AI-assisted writing","Scheduling","Analytics"],
+   weaknesses:["LinkedIn only","Expensive vs manual"],
+   pricing:"$$",difficulty:"Beginner",color:"#F5C842",
+   workflows:["LinkedIn Thought Leadership"],
+   alternatives:["Taplio","Shield Analytics"],href:"https://supergrow.ai",
+   integrates:["chatgpt","claude","midjourney"]},
+
+  {id:"clay",name:"Clay",category:"growth",summary:"AI-powered lead enrichment and GTM workflows",role:"Prospecting, outbound, lead intelligence",
+   useCases:["Enrich lead data with AI","Personalize outreach at scale","Waterfall enrichment","GTM data workflows","LinkedIn scraping"],
+   avoidWhen:["Inbound marketing","Content creation"],
+   strengths:["Most powerful enrichment tool","Waterfall data","AI research agent","200+ integrations"],
+   weaknesses:["Very expensive","Complex for beginners","Requires strategy"],
+   pricing:"$$$",difficulty:"Advanced",color:"#F5C842",
+   workflows:[],
+   alternatives:["Apollo.io","ZoomInfo"],href:"https://clay.com",
+   integrates:["apollo","n8n","chatgpt"]},
+
+  {id:"apollo",name:"Apollo.io",category:"growth",summary:"B2B lead sourcing and outreach platform",role:"Outreach, pipeline building, prospect discovery",
+   useCases:["Find B2B contacts","Email sequences","CRM sync","Lead scoring","Company intelligence"],
+   avoidWhen:["B2C audiences","Content creation"],
+   strengths:["270M+ contacts","Built-in sequences","Affordable","CRM integrations"],
+   weaknesses:["Data accuracy varies","Email deliverability needs warmup"],
+   pricing:"$$",difficulty:"Beginner",color:"#F5C842",
+   workflows:[],
+   alternatives:["Clay","ZoomInfo","Hunter.io"],href:"https://apollo.io",
+   integrates:["clay","n8n","chatgpt"]},
+];
+
+const CATEGORIES = [
+  {id:"think",label:"Think / Strategy",icon:"◉",color:"#A78BFA",desc:"Reasoning, writing, research"},
+  {id:"build",label:"Build",icon:"⬡",color:"#4EABF8",desc:"Code, prototype, deploy"},
+  {id:"creative",label:"Creative",icon:"✦",color:"#F472B6",desc:"Image, video, audio, design"},
+  {id:"automation",label:"Automation",icon:"⟳",color:"#FB923C",desc:"Agents, workflows, voice"},
+  {id:"infra",label:"Infrastructure",icon:"▣",color:"#6EE7C7",desc:"Databases, hosting, payments"},
+  {id:"growth",label:"Growth / PMM",icon:"↗",color:"#F5C842",desc:"LinkedIn, leads, GTM"},
+];
+
+const WORKFLOWS = [
+  {
+    id:"linkedin",title:"LinkedIn Thought Leadership",time:"2–4 hrs",
+    goal:"Turn raw ideas or market insight into polished LinkedIn content that builds authority.",
+    steps:[
+      {tool:"Perplexity",step:"Research",action:"Find trending topics, stats, angles"},
+      {tool:"ChatGPT",step:"Ideate",action:"Generate 10 hook variations + post structures"},
+      {tool:"Claude",step:"Write",action:"Craft polished long-form post with your voice"},
+      {tool:"Supergrow",step:"Schedule",action:"Format carousel, schedule, analyze"},
+      {tool:"Midjourney",step:"Visual",action:"Generate supporting brand visuals"},
+      {tool:"CapCut",step:"Repurpose",action:"Turn into short video for maximum reach"},
+    ],
+    outputs:["1 LinkedIn post","1 visual asset","1 short video","Scheduled content queue"],
+    beginnerStack:["ChatGPT","Claude","Canva"],
+    advancedStack:["Perplexity","Claude","Supergrow","Midjourney","CapCut"],
+    color:"#A78BFA"
+  },
+  {
+    id:"launch",title:"Product Launch Campaign",time:"1–2 weeks",
+    goal:"Execute a full product launch from positioning to live campaign with analytics tracking.",
+    steps:[
+      {tool:"Perplexity",step:"Research",action:"Competitive landscape + market sizing"},
+      {tool:"ChatGPT",step:"Positioning",action:"ICP definition, messaging, GTM strategy"},
+      {tool:"Claude",step:"Copywriting",action:"Landing page copy, emails, PRD"},
+      {tool:"Chronicle",step:"Deck",action:"Investor/stakeholder launch presentation"},
+      {tool:"v0",step:"Frontend",action:"Build landing page from copy prompt"},
+      {tool:"Runway",step:"Video",action:"Launch video / teaser"},
+      {tool:"ElevenLabs",step:"Voice",action:"Voiceover for video assets"},
+      {tool:"Vercel",step:"Deploy",action:"Ship landing page live"},
+      {tool:"PostHog",step:"Track",action:"Monitor funnel, signups, behavior"},
+    ],
+    outputs:["Launch landing page","Positioning deck","Launch video","Email sequence","Analytics dashboard"],
+    beginnerStack:["ChatGPT","Claude","v0","Vercel"],
+    advancedStack:["All 9 tools in sequence"],
+    color:"#4EABF8"
+  },
+  {
+    id:"ugc",title:"UGC Ad Creation",time:"4–8 hrs",
+    goal:"Create scroll-stopping, human-feeling video ads using entirely AI tools.",
+    steps:[
+      {tool:"ChatGPT",step:"Script",action:"Write 3–5 UGC ad scripts with hooks"},
+      {tool:"ElevenLabs",step:"Voice",action:"Generate authentic-sounding VO"},
+      {tool:"HeyGen",step:"Avatar",action:"Create talking-head video from VO"},
+      {tool:"CapCut",step:"Edit",action:"Add captions, cuts, B-roll, music"},
+      {tool:"Suno",step:"Audio",action:"Generate branded background track"},
+    ],
+    outputs:["3–5 video ads","Branded audio","Ready for Meta/TikTok upload"],
+    beginnerStack:["ChatGPT","ElevenLabs","CapCut"],
+    advancedStack:["ChatGPT","ElevenLabs","HeyGen","CapCut","Suno"],
+    color:"#F472B6"
+  },
+  {
+    id:"research",title:"Competitor Research",time:"2–3 hrs",
+    goal:"Build a comprehensive competitive intelligence brief from scratch.",
+    steps:[
+      {tool:"Perplexity",step:"Discover",action:"Find competitors, recent news, positioning"},
+      {tool:"NotebookLM",step:"Synthesize",action:"Upload competitor content, extract insights"},
+      {tool:"Claude",step:"Analyze",action:"Write battle cards, SWOT, differentiation matrix"},
+      {tool:"ChatGPT",step:"Strategize",action:"Generate counter-positioning and responses"},
+    ],
+    outputs:["Competitive landscape doc","Battle cards","SWOT analysis","Differentiation brief"],
+    beginnerStack:["Perplexity","Claude"],
+    advancedStack:["Perplexity","NotebookLM","Claude","ChatGPT"],
+    color:"#6EE7C7"
+  },
+  {
+    id:"mvp",title:"AI App MVP",time:"1–2 weeks",
+    goal:"Go from idea to live, monetizable AI app without a full engineering team.",
+    steps:[
+      {tool:"ChatGPT",step:"Plan",action:"Define product spec, user flows, architecture"},
+      {tool:"Cursor",step:"Build",action:"AI-assisted full-stack development"},
+      {tool:"v0",step:"UI",action:"Generate frontend components from prompts"},
+      {tool:"Supabase",step:"Backend",action:"Database, auth, file storage"},
+      {tool:"Replit",step:"Experiment",action:"Rapid prototype and test"},
+      {tool:"Vercel",step:"Deploy",action:"Ship frontend to production"},
+      {tool:"Stripe",step:"Monetize",action:"Add payment / subscription logic"},
+    ],
+    outputs:["Live web app","Auth system","Database","Payment flow","Production URL"],
+    beginnerStack:["Replit","Supabase","Stripe"],
+    advancedStack:["Cursor","v0","Supabase","Vercel","Stripe"],
+    color:"#FB923C"
+  },
+  {
+    id:"meetings",title:"Meeting Intelligence",time:"1 hr post-meeting",
+    goal:"Transform raw meeting recordings into structured, actionable intelligence automatically.",
+    steps:[
+      {tool:"Fireflies.ai",step:"Capture",action:"Auto-transcribe and tag meeting"},
+      {tool:"NotebookLM",step:"Analyze",action:"Q&A over transcript, extract themes"},
+      {tool:"ChatGPT",step:"Synthesize",action:"Write summary, decisions, action items"},
+      {tool:"n8n",step:"Automate",action:"Route to Notion, Slack, CRM automatically"},
+    ],
+    outputs:["Structured meeting summary","Action item list","Auto-routed to tools","Searchable archive"],
+    beginnerStack:["Fireflies.ai","ChatGPT"],
+    advancedStack:["Fireflies.ai","NotebookLM","ChatGPT","n8n"],
+    color:"#F5C842"
+  },
+];
+
+const TASKS = [
+  {label:"Create LinkedIn Content",icon:"✍",workflows:["linkedin"],count:"6 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(167,139,250,0.12),transparent 70%)"},
+  {label:"Launch a Product",icon:"🚀",workflows:["launch"],count:"9 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(78,171,248,0.12),transparent 70%)"},
+  {label:"Make a Video Ad",icon:"🎬",workflows:["ugc"],count:"5 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(244,114,182,0.12),transparent 70%)"},
+  {label:"Research Competitors",icon:"🔍",workflows:["research"],count:"4 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(110,231,199,0.12),transparent 70%)"},
+  {label:"Build an AI App",icon:"⚡",workflows:["mvp"],count:"7 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(251,146,60,0.12),transparent 70%)"},
+  {label:"Analyze Meetings",icon:"📋",workflows:["meetings"],count:"4 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(245,200,66,0.12),transparent 70%)"},
+  {label:"Plan GTM Strategy",icon:"🎯",workflows:["launch","research"],count:"13 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(167,139,250,0.12),transparent 70%)"},
+  {label:"Build AI Workflows",icon:"⟳",workflows:["meetings","mvp"],count:"11 tools",glow:"radial-gradient(ellipse at 0% 0%,rgba(251,146,60,0.12),transparent 70%)"},
+];
+
+const FILTERS = [
+  {id:"all",label:"All Tools"},
+  {id:"think",label:"Strategy"},
+  {id:"build",label:"Build"},
+  {id:"creative",label:"Creative"},
+  {id:"automation",label:"Automation"},
+  {id:"infra",label:"Infrastructure"},
+  {id:"growth",label:"Growth"},
+  {id:"beginner",label:"Beginner Friendly"},
+  {id:"advanced",label:"Advanced"},
+  {id:"free",label:"Free Tier"},
+];
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let currentPage = 'dashboard';
+let currentFilter = 'all';
+let searchOpen = false;
+let ecoAnimFrame;
+
+// ═══════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════
+function navigate(pageId, breadcrumb){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const page = document.getElementById('page-'+pageId);
+  if(page) page.classList.add('active');
+  document.querySelector(`[data-page="${pageId}"]`)?.classList.add('active');
+  document.getElementById('breadcrumb-cur').textContent = breadcrumb || pageId;
+  currentPage = pageId;
+  if(pageId==='ecosystem') setTimeout(initEcoMap,50);
+}
+
+document.querySelectorAll('.nav-item[data-page]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const page = el.dataset.page;
+    const labels = {dashboard:'Command Center',workflows:'Workflow Playbooks',tools:'Tool Library',ecosystem:'Ecosystem Map'};
+    navigate(page, labels[page]);
+  });
+});
+
+document.querySelectorAll('.nav-item[data-action]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const action = el.dataset.action;
+    currentFilter = action;
+    navigate('tools','Tool Library');
+    renderFilters();
+    renderTools();
+  });
+});
+
+// ═══════════════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════════════
+function renderDashboard(){
+  // Task grid
+  const taskGrid = document.getElementById('task-grid');
+  taskGrid.innerHTML = '';
+  TASKS.forEach(t=>{
+    const chip = document.createElement('div');
+    chip.className = 'task-chip';
+    chip.style.setProperty('--chip-glow',t.glow);
+    chip.innerHTML = `<span class="task-chip-icon">${t.icon}</span><div class="task-chip-label">${t.label}</div><div class="task-chip-count">${t.count}</div>`;
+    chip.addEventListener('click',()=>{
+      navigate('workflows','Workflow Playbooks');
+      // open first matching workflow
+      if(t.workflows[0]){
+        setTimeout(()=>{
+          const row = document.querySelector(`.wf-row[data-id="${t.workflows[0]}"]`);
+          if(row){row.classList.add('open');row.scrollIntoView({behavior:'smooth',block:'start'});}
+        },100);
+      }
+    });
+    taskGrid.appendChild(chip);
+  });
+
+  // Pinned workflows
+  const pinned = document.getElementById('pinned-workflows');
+  pinned.innerHTML = '';
+  WORKFLOWS.slice(0,4).forEach(wf=>{
+    const card = document.createElement('div');
+    card.className = 'wf-card';
+    card.innerHTML = `
+      <div class="wf-card-top">
+        <div class="wf-card-icon">⟿</div>
+        <div class="wf-card-time">${wf.time}</div>
+      </div>
+      <div class="wf-card-title">${wf.title}</div>
+      <div class="wf-card-desc">${wf.goal}</div>
+      <div class="wf-tool-chips">
+        ${wf.steps.map(s=>`<span class="wf-tool-chip">${s.tool}</span>`).join('')}
+      </div>
+    `;
+    card.style.borderLeftColor = wf.color;
+    card.style.borderLeft = `3px solid ${wf.color}40`;
+    card.addEventListener('click',()=>{
+      navigate('workflows','Workflow Playbooks');
+      setTimeout(()=>{
+        const row = document.querySelector(`.wf-row[data-id="${wf.id}"]`);
+        if(row){row.classList.add('open');row.scrollIntoView({behavior:'smooth',block:'start'});}
+      },80);
+    });
+    pinned.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// WORKFLOWS
+// ═══════════════════════════════════════════════════════
+function renderWorkflows(){
+  const list = document.getElementById('wf-list');
+  list.innerHTML = '';
+  WORKFLOWS.forEach((wf,i)=>{
+    const row = document.createElement('div');
+    row.className = 'wf-row';
+    row.dataset.id = wf.id;
+    row.innerHTML = `
+      <div class="wf-row-head">
+        <div class="wf-row-num">0${i+1}</div>
+        <div class="wf-row-info">
+          <div class="wf-row-title">${wf.title}</div>
+          <div class="wf-row-meta">${wf.steps.map(s=>s.tool).join(' → ')}</div>
+        </div>
+        <div class="wf-row-time">${wf.time}</div>
+        <div class="wf-row-toggle">▼</div>
+      </div>
+      <div class="wf-expand">
+        <div class="section-label" style="margin-bottom:14px">WORKFLOW SEQUENCE</div>
+        <div class="flow-diagram">
+          ${wf.steps.map((s,idx)=>`
+            <div class="flow-node" style="border-left:2px solid ${wf.color}40">
+              <div class="flow-node-step">STEP ${idx+1}</div>
+              <div class="flow-node-tool" style="color:${wf.color}">${s.tool}</div>
+              <div class="flow-node-action">${s.action}</div>
+            </div>
+            ${idx<wf.steps.length-1?'<div class="flow-arrow">→</div>':''}
+          `).join('')}
+        </div>
+        <div class="wf-meta-grid">
+          <div class="wf-meta-box">
+            <div class="wf-meta-label">EXPECTED OUTPUTS</div>
+            <div class="wf-meta-list">
+              ${wf.outputs.map(o=>`<div class="wf-meta-item">${o}</div>`).join('')}
+            </div>
+          </div>
+          <div class="wf-meta-box">
+            <div class="wf-meta-label">BEGINNER STACK</div>
+            <div class="wf-meta-list" style="margin-bottom:10px">
+              ${wf.beginnerStack.map(t=>`<div class="wf-meta-item">${t}</div>`).join('')}
+            </div>
+            <div class="wf-meta-label" style="margin-top:8px">ADVANCED STACK</div>
+            <div class="wf-meta-list">
+              ${wf.advancedStack.map(t=>`<div class="wf-meta-item">${t}</div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div class="wf-meta-box" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px">
+          <div class="wf-meta-label">GOAL</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.6">${wf.goal}</div>
+        </div>
+      </div>
+    `;
+    row.querySelector('.wf-row-head').addEventListener('click',()=>row.classList.toggle('open'));
+    list.appendChild(row);
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// TOOL LIBRARY
+// ═══════════════════════════════════════════════════════
+function renderFilters(){
+  const bar = document.getElementById('filter-bar');
+  bar.innerHTML = '';
+  FILTERS.forEach(f=>{
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip'+(f.id===currentFilter?' active':'');
+    chip.dataset.filter = f.id;
+    chip.textContent = f.label;
+    chip.addEventListener('click',()=>{
+      currentFilter = f.id;
+      document.querySelectorAll('.filter-chip').forEach(c=>c.classList.toggle('active',c.dataset.filter===f.id));
+      renderTools();
+    });
+    bar.appendChild(chip);
+  });
+}
+
+function toolMatchesFilter(tool, filter){
+  if(filter==='all') return true;
+  if(filter==='beginner') return tool.difficulty==='Beginner';
+  if(filter==='advanced') return tool.difficulty==='Advanced'||tool.difficulty==='Intermediate';
+  if(filter==='free') return tool.pricing==='Free'||tool.pricing==='$';
+  return tool.category===filter;
+}
+
+function getPricingColor(p){
+  if(p==='Free') return '#4ade80';
+  if(p==='$') return '#86efac';
+  if(p==='$$') return '#fbbf24';
+  if(p==='$$$') return '#f87171';
+  return '#94a3b8';
+}
+
+function getDiffColor(d){
+  if(d==='Beginner') return '#4ade80';
+  if(d==='Intermediate') return '#fbbf24';
+  if(d==='Advanced') return '#f87171';
+  return '#94a3b8';
+}
+
+function renderTools(searchQuery=''){
+  const body = document.getElementById('tools-body');
+  body.innerHTML = '';
+  let filtered = TOOLS.filter(t=>toolMatchesFilter(t,currentFilter));
+  if(searchQuery){
+    const q = searchQuery.toLowerCase();
+    filtered = TOOLS.filter(t=>
+      t.name.toLowerCase().includes(q)||
+      t.summary.toLowerCase().includes(q)||
+      t.role.toLowerCase().includes(q)||
+      t.useCases.some(u=>u.toLowerCase().includes(q))||
+      t.category.toLowerCase().includes(q)
+    );
+  }
+  filtered.forEach(tool=>{
+    const card = document.createElement('div');
+    card.className = 'tool-card';
+    const cat = CATEGORIES.find(c=>c.id===tool.category);
+    card.innerHTML = `
+      <div class="tc-head">
+        <div class="tc-dot" style="background:${tool.color};box-shadow:0 0 6px ${tool.color}60"></div>
+        <div class="tc-info">
+          <div class="tc-name">${tool.name}</div>
+          <div class="tc-summary">${tool.summary}</div>
+        </div>
+        <button class="tc-expand-btn">▼</button>
+      </div>
+      <div class="tc-badges">
+        <span class="tc-badge" style="color:${cat?.color||'#fff'};background:${cat?.color||'#fff'}15;border-color:${cat?.color||'#fff'}25">${cat?.label||tool.category}</span>
+        <span class="tc-badge" style="color:${getPricingColor(tool.pricing)};background:${getPricingColor(tool.pricing)}15;border-color:${getPricingColor(tool.pricing)}25">${tool.pricing}</span>
+        <span class="tc-badge" style="color:${getDiffColor(tool.difficulty)};background:${getDiffColor(tool.difficulty)}15;border-color:${getDiffColor(tool.difficulty)}25">${tool.difficulty}</span>
+      </div>
+      <div class="tc-body">
+        <div class="tc-divider" style="margin-bottom:14px"></div>
+        <div class="tc-section">
+          <div class="tc-sec-label">ROLE</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.5">${tool.role}</div>
+        </div>
+        <div class="tc-section">
+          <div class="tc-sec-label">USE WHEN</div>
+          <div class="tc-sec-list">${tool.useCases.map(u=>`<div class="tc-sec-item arrow">${u}</div>`).join('')}</div>
+        </div>
+        <div class="tc-section">
+          <div class="tc-sec-label">AVOID WHEN</div>
+          <div class="tc-sec-list">${tool.avoidWhen.map(u=>`<div class="tc-sec-item red">${u}</div>`).join('')}</div>
+        </div>
+        <div class="tc-section">
+          <div class="tc-sec-label">STRENGTHS</div>
+          <div class="tc-sec-list">${tool.strengths.map(u=>`<div class="tc-sec-item green">${u}</div>`).join('')}</div>
+        </div>
+        ${tool.alternatives&&tool.alternatives.length?`<div class="tc-section"><div class="tc-sec-label">ALTERNATIVES</div><div style="display:flex;gap:6px;flex-wrap:wrap">${tool.alternatives.map(a=>`<span style="font-size:11px;padding:3px 9px;border-radius:4px;background:var(--bg4);color:var(--text2);border:1px solid var(--border);font-family:'JetBrains Mono',monospace">${a}</span>`).join('')}</div></div>`:''}
+        ${tool.workflows&&tool.workflows.length?`<div class="tc-section"><div class="tc-sec-label">IN WORKFLOWS</div><div style="display:flex;gap:6px;flex-wrap:wrap">${tool.workflows.map(w=>`<span style="font-size:11px;padding:3px 9px;border-radius:4px;background:rgba(110,231,199,0.07);color:var(--accent);border:1px solid rgba(110,231,199,0.25);font-family:'JetBrains Mono',monospace">${w}</span>`).join('')}</div></div>`:''}
+        ${tool.weaknesses&&tool.weaknesses.length?`<div class="tc-section"><div class="tc-sec-label">WEAKNESSES</div><div class="tc-sec-list">${tool.weaknesses.map(u=>`<div class="tc-sec-item red">${u}</div>`).join('')}</div></div>`:''}
+      </div>
+      <div class="tc-footer">
+        <a class="tc-link" href="${tool.href}" target="_blank" rel="noopener">Open ${tool.name} ↗</a>
+      </div>
+    `;
+    card.querySelector('.tc-expand-btn').addEventListener('click',e=>{
+      e.stopPropagation();
+      card.classList.toggle('open');
+      const btn = card.querySelector('.tc-expand-btn');
+      btn.textContent = card.classList.contains('open')?'▲':'▼';
+    });
+    card.querySelector('.tc-head').addEventListener('click',e=>{
+      // Don't re-toggle if clicking the button itself
+      if(e.target.closest('.tc-expand-btn')) return;
+      card.classList.toggle('open');
+      const btn = card.querySelector('.tc-expand-btn');
+      btn.textContent = card.classList.contains('open')?'▲':'▼';
+    });
+    body.appendChild(card);
+  });
+  if(!filtered.length){
+    body.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text3);font-size:13px">No tools found for "${searchQuery||currentFilter}"</div>`;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// ECOSYSTEM MAP (Canvas)
+// ═══════════════════════════════════════════════════════
+let ecoNodes=[], ecoEdges=[], ecoMouse={x:-999,y:-999};
+
+function initEcoMap(){
+  const canvas = document.getElementById('eco-canvas');
+  const wrap = document.getElementById('eco-canvas-wrap');
+  canvas.width = wrap.clientWidth;
+  canvas.height = wrap.clientHeight;
+
+  // Build nodes with physics positions
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const catAngles = {};
+  CATEGORIES.forEach((cat,i)=>{ catAngles[cat.id] = (i/CATEGORIES.length)*Math.PI*2; });
+
+  ecoNodes = TOOLS.map(t=>{
+    const angle = catAngles[t.category] + (Math.random()-0.5)*0.8;
+    const radius = 130 + Math.random()*80;
+    return {
+      id:t.id, name:t.name, category:t.category, role:t.role,
+      color:t.color, connects:t.integrates||[],
+      x: cx + Math.cos(angle)*radius,
+      y: cy + Math.sin(angle)*radius,
+      vx:0,vy:0,radius:20,hovered:false,
+    };
+  });
+
+  ecoEdges = [];
+  ecoNodes.forEach(n=>{
+    (n.connects||[]).forEach(cid=>{
+      if(ecoNodes.find(nn=>nn.id===cid) && !ecoEdges.find(e=>(e.a===n.id&&e.b===cid)||(e.a===cid&&e.b===n.id))){
+        ecoEdges.push({a:n.id,b:cid});
+      }
+    });
+  });
+
+  canvas.onmousemove = (e)=>{
+    const rect = canvas.getBoundingClientRect();
+    ecoMouse = {x:e.clientX-rect.left, y:e.clientY-rect.top};
+    const hovered = ecoNodes.find(n=>Math.hypot(n.x-ecoMouse.x,n.y-ecoMouse.y)<n.radius+4);
+    const tt = document.getElementById('eco-tooltip');
+    if(hovered){
+      document.getElementById('eco-tt-name').textContent=hovered.name;
+      document.getElementById('eco-tt-role').textContent=hovered.role;
+      document.getElementById('eco-tt-connects').textContent='Connects to: '+(hovered.connects||[]).join(', ');
+      tt.style.opacity='1';
+      let tx = hovered.x+30, ty = hovered.y-20;
+      if(tx+200>canvas.width) tx=hovered.x-220;
+      if(ty<0) ty=10;
+      tt.style.left=tx+'px';tt.style.top=ty+'px';
+    } else {
+      tt.style.opacity='0';
+    }
+    ecoNodes.forEach(n=>n.hovered=Math.hypot(n.x-ecoMouse.x,n.y-ecoMouse.y)<n.radius+4);
+  };
+  canvas.onmouseleave=()=>{ document.getElementById('eco-tooltip').style.opacity='0'; ecoNodes.forEach(n=>n.hovered=false); };
+
+  if(ecoAnimFrame) cancelAnimationFrame(ecoAnimFrame);
+  ecoLoop(canvas);
+}
+
+function ecoLoop(canvas){
+  const ctx = canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // background grid
+    const gridColor = isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.02)';
+    ctx.strokeStyle=gridColor;
+    ctx.lineWidth=1;
+    for(let x=0;x<W;x+=60){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke(); }
+    for(let y=0;y<H;y+=60){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke(); }
+
+    // edges
+    ecoEdges.forEach(e=>{
+      const na=ecoNodes.find(n=>n.id===e.a), nb=ecoNodes.find(n=>n.id===e.b);
+      if(!na||!nb) return;
+      const hoveredEdge = na.hovered||nb.hovered;
+      ctx.beginPath();
+      ctx.moveTo(na.x,na.y);ctx.lineTo(nb.x,nb.y);
+      ctx.strokeStyle=hoveredEdge?na.color+'60':(isLight?'rgba(0,0,0,0.06)':'rgba(255,255,255,0.04)');
+      ctx.lineWidth=hoveredEdge?1.5:0.5;
+      ctx.stroke();
+    });
+
+    // nodes
+    ecoNodes.forEach(n=>{
+      const r = n.hovered?n.radius+4:n.radius;
+      // glow
+      if(n.hovered){
+        const grd=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,r*2.5);
+        grd.addColorStop(0,n.color+'40');grd.addColorStop(1,'transparent');
+        ctx.beginPath();ctx.arc(n.x,n.y,r*2.5,0,Math.PI*2);
+        ctx.fillStyle=grd;ctx.fill();
+      }
+      // circle
+      ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);
+      ctx.fillStyle=n.hovered?n.color+'30':(isLight?'rgba(0,0,0,0.04)':'rgba(255,255,255,0.04)');ctx.fill();
+      ctx.strokeStyle=n.hovered?n.color:n.color+'50';
+      ctx.lineWidth=n.hovered?2:1;ctx.stroke();
+      // label
+      ctx.fillStyle=n.hovered?(isLight?'#000':'#fff'):n.color+'cc';
+      ctx.font=`${n.hovered?'600 ':'400 '}11px Syne,sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(n.name,n.x,n.y);
+    });
+
+    ecoAnimFrame=requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ═══════════════════════════════════════════════════════
+// SEARCH OVERLAY
+// ═══════════════════════════════════════════════════════
+function openSearch(){
+  searchOpen=true;
+  document.getElementById('search-overlay').classList.add('open');
+  document.getElementById('sm-input').value='';
+  document.getElementById('sm-input').focus();
+  renderSearchResults('');
+}
+function closeSearch(){
+  searchOpen=false;
+  document.getElementById('search-overlay').classList.remove('open');
+}
+
+function renderSearchResults(q){
+  const res = document.getElementById('sm-results');
+  if(!q){
+    res.innerHTML = `
+      <div class="sm-section-header">WORKFLOWS</div>
+      ${WORKFLOWS.slice(0,3).map(w=>smResultHTML('⟿','#4EABF8',w.title,'workflow',w.id,'wf')).join('')}
+      <div class="sm-section-header">POPULAR TOOLS</div>
+      ${TOOLS.slice(0,4).map(t=>smResultHTML('⬡',t.color,t.name,'tool',t.id,'tool')).join('')}
+    `;
+    return;
+  }
+  const qL=q.toLowerCase();
+  const tMatches=TOOLS.filter(t=>t.name.toLowerCase().includes(qL)||t.summary.toLowerCase().includes(qL)||t.role.toLowerCase().includes(qL)||t.useCases.some(u=>u.toLowerCase().includes(qL))||t.category.toLowerCase().includes(qL));
+  const wMatches=WORKFLOWS.filter(w=>w.title.toLowerCase().includes(qL)||w.steps.some(s=>s.tool.toLowerCase().includes(qL))||w.goal.toLowerCase().includes(qL));
+
+  if(!tMatches.length&&!wMatches.length){
+    res.innerHTML=`<div class="sm-empty">No results for "${q}"</div>`;return;
+  }
+  let html='';
+  if(wMatches.length){
+    html+=`<div class="sm-section-header">WORKFLOWS</div>`;
+    html+=wMatches.map(w=>smResultHTML('⟿','#4EABF8',w.title,'workflow',w.id,'wf')).join('');
+  }
+  if(tMatches.length){
+    html+=`<div class="sm-section-header">TOOLS</div>`;
+    html+=tMatches.slice(0,6).map(t=>smResultHTML('⬡',t.color,t.name,t.summary,t.id,'tool')).join('');
+  }
+  res.innerHTML=html;
+  res.querySelectorAll('.sm-result').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const type=el.dataset.type,id=el.dataset.id;
+      closeSearch();
+      if(type==='wf'){
+        navigate('workflows','Workflow Playbooks');
+        setTimeout(()=>{
+          const row=document.querySelector(`.wf-row[data-id="${id}"]`);
+          if(row){row.classList.add('open');row.scrollIntoView({behavior:'smooth',block:'start'});}
+        },100);
+      } else if(type==='tool'){
+        currentFilter='all';navigate('tools','Tool Library');
+        renderFilters();
+        renderTools();
+        setTimeout(()=>{
+          // Find and open the specific tool card
+          const cards = document.querySelectorAll('.tool-card');
+          cards.forEach(card=>{
+            const nameEl = card.querySelector('.tc-name');
+            if(nameEl){
+              const tool = TOOLS.find(t=>t.id===id);
+              if(tool && nameEl.textContent===tool.name){
+                card.classList.add('open');
+                const btn = card.querySelector('.tc-expand-btn');
+                if(btn) btn.textContent='▲';
+                card.scrollIntoView({behavior:'smooth',block:'center'});
+              }
+            }
+          });
+        },100);
+      }
+    });
+  });
+}
+
+function smResultHTML(icon,color,name,sub,id,type){
+  return `<div class="sm-result" data-id="${id}" data-type="${type}">
+    <div class="sm-result-icon" style="background:${color}20;color:${color}">${icon}</div>
+    <div class="sm-result-info">
+      <div class="sm-result-name">${name}</div>
+      <div class="sm-result-type">${sub}</div>
+    </div>
+    <div class="sm-result-arrow">→</div>
+  </div>`;
+}
+
+document.getElementById('global-search').addEventListener('click',openSearch);
+document.getElementById('cmd-k-hint').addEventListener('click',openSearch);
+document.getElementById('sm-input').addEventListener('input',e=>renderSearchResults(e.target.value));
+document.getElementById('search-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSearch();});
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();searchOpen?closeSearch():openSearch();}
+  if(e.key==='Escape'&&searchOpen) closeSearch();
+});
+
+// ═══════════════════════════════════════════════════════
+// THEME TOGGLE
+// ═══════════════════════════════════════════════════════
+let isLight = false;
+document.getElementById('theme-toggle').addEventListener('click', ()=>{
+  isLight = !isLight;
+  const root = document.documentElement;
+  const label = document.getElementById('theme-label');
+  const icon = document.querySelector('#theme-toggle .theme-icon');
+  if(isLight){
+    root.classList.add('light');
+    label.textContent = 'Dark';
+    icon.textContent = '🌙';
+    // Eco canvas needs re-init for light bg
+    if(currentPage==='ecosystem') initEcoMap();
+  } else {
+    root.classList.remove('light');
+    label.textContent = 'Light';
+    icon.textContent = '☀️';
+    if(currentPage==='ecosystem') initEcoMap();
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+renderDashboard();
+renderWorkflows();
+renderFilters();
+renderTools();
+
+// resize eco canvas
+window.addEventListener('resize',()=>{
+  if(currentPage==='ecosystem') initEcoMap();
+});
+</script>
+<a href="index.html" style="position:fixed;top:12px;right:16px;z-index:99999;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#6366F1;background:rgba(255,255,255,0.95);border:1.5px solid #6366F1;padding:7px 16px;border-radius:20px;text-decoration:none;box-shadow:0 2px 12px rgba(0,0,0,0.15);backdrop-filter:blur(8px);" onmouseenter="this.style.background='#6366F1';this.style.color='white'" onmouseleave="this.style.background='rgba(255,255,255,0.95)';this.style.color='#6366F1'">← Portfolio</a>
+</body>
+</html>
