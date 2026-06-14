@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Advantage+ India — SMB GTM Strategy · Bhaswati Bera</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#1877F2;
+  --blue-dark:#0D5FCC;
+  --blue-light:#E7F0FD;
+  --blue-pale:#F5F9FF;
+  --ink:#1C1E21;
+  --ink-mid:#3A3A3A;
+  --muted:#65676B;
+  --bg:#FFFFFF;
+  --surface:#F0F2F5;
+  --border:#E4E6EA;
+  --white:#FFFFFF;
+  --green:#0B8A3E;
+  --green-light:#E6F4EC;
+  --red:#C62828;
+  --red-light:#FDEAEA;
+  --amber:#D4720A;
+  --amber-light:#FEF3E2;
+  --instagram:#E1306C;
+  --instagram-light:#FDE8F0;
+  --whatsapp:#25D366;
+  --whatsapp-light:#E8FBF0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;letter-spacing:-0.01em;background:var(--bg);color:var(--ink);overflow-x:hidden}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0 64px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.meta-logo{display:flex;align-items:center;gap:8px}
+.meta-wordmark{font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:18px;color:var(--blue);letter-spacing:-0.5px}
+.nav-badge{font-family:'DM Mono',monospace;font-size:9px;padding:3px 10px;background:var(--blue-light);color:var(--blue-dark);border-radius:3px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500}
+.nav-links{display:flex;gap:24px}
+.nav-link{font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;font-weight:500}
+.nav-link:hover{color:var(--blue)}
+.nav-pill{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:20px;text-transform:uppercase}
+
+/* HERO */
+.hero{background:var(--blue);min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 60%);right:-100px;top:-100px;pointer-events:none}
+.hero-left{padding:80px 56px 80px 64px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.hero-tags{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.htag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;padding:5px 12px;border-radius:3px;text-transform:uppercase;font-weight:500}
+.htag.hypo{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.25)}
+.htag.b2b{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,4.5vw,58px);font-weight:700;color:white;line-height:1.0;letter-spacing:-1.5px;margin-bottom:20px}
+.hero-title em{font-style:italic;color:rgba(255,255,255,0.55)}
+.hero-thesis{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.75;max-width:420px;margin-bottom:32px;border-left:2px solid rgba(255,255,255,0.4);padding-left:16px}
+.hero-meta{display:flex;gap:0;border:1px solid rgba(255,255,255,0.2);border-radius:8px;overflow:hidden;margin-bottom:40px;width:fit-content}
+.hmi{padding:11px 18px;border-right:1px solid rgba(255,255,255,0.15)}
+.hmi:last-child{border-right:none}
+.hmi-key{font-size:9px;color:rgba(255,255,255,0.45);margin-bottom:3px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.hmi-val{font-size:13px;color:white;font-weight:600}
+.btn-white{display:inline-flex;align-items:center;gap:10px;background:white;color:var(--blue);font-size:13px;font-weight:700;padding:13px 26px;border-radius:6px;cursor:pointer;border:none;transition:all 0.2s;font-family:'Inter',sans-serif}
+.btn-white:hover{background:var(--blue-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+
+.hero-right{padding:64px;display:flex;flex-direction:column;justify-content:center;gap:3px;position:relative;z-index:1}
+.hstat{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:22px 20px;transition:background 0.2s}
+.hstat:hover{background:rgba(255,255,255,0.13)}
+.hstat-label{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.hstat-val{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:white;line-height:1;margin-bottom:4px}
+.hstat-sub{font-size:11px;color:rgba(255,255,255,0.45)}
+.hstat.featured{background:white;border-color:white}
+.hstat.featured .hstat-label{color:var(--muted)}
+.hstat.featured .hstat-val{color:var(--blue)}
+.hstat.featured .hstat-sub{color:var(--muted)}
+
+/* SECTIONS */
+.sec{padding:80px 64px}
+.sec-inner{max-width:1140px;margin:0 auto}
+.sec.alt{background:var(--surface)}
+.sec.dark{background:var(--ink)}
+.sec.blue{background:var(--blue)}
+.sec-chip{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue-dark);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;padding:5px 14px;border-radius:20px;text-transform:uppercase;margin-bottom:14px;font-weight:500}
+.sec.dark .sec-chip,.sec.blue .sec-chip{background:rgba(255,255,255,0.15);color:white}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,40px);font-weight:700;line-height:1.1;letter-spacing:-0.8px;margin-bottom:40px;color:var(--ink)}
+.sec-h span{color:var(--blue)}
+.sec.dark .sec-h,.sec.blue .sec-h{color:white}
+.sec.dark .sec-h span{color:rgba(255,255,255,0.55)}
+.sec.blue .sec-h span{color:rgba(255,255,255,0.6)}
+
+/* PROBLEM SECTION - 2-sided market */
+.two-sided{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;margin-bottom:28px}
+.side{background:var(--white);border-radius:12px;padding:28px;border:1.5px solid var(--border)}
+.side.smb{border-color:var(--blue);border-width:2px}
+.side-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;font-weight:500}
+.side.smb .side-label{color:var(--blue)}
+.side.user .side-label{color:var(--muted)}
+.side-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:14px}
+.side-items{display:flex;flex-direction:column;gap:8px}
+.side-item{font-size:12px;color:var(--ink-mid);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.side-item.problem::before{content:'✕';color:var(--red);font-size:11px;flex-shrink:0;font-weight:700}
+.side-item.good::before{content:'✓';color:var(--green);font-size:11px;flex-shrink:0;font-weight:700}
+.middle-arrow{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 20px}
+.ma-line{width:1px;height:40px;background:var(--border)}
+.ma-icon{font-size:28px}
+.ma-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);letter-spacing:0.08em;text-transform:uppercase;text-align:center;max-width:80px;font-weight:500}
+
+.problem-banner{background:var(--blue-light);border-radius:10px;padding:20px 24px;border-left:3px solid var(--blue);display:flex;align-items:center;gap:16px}
+.pb-icon{font-size:24px;flex-shrink:0}
+.pb-text strong{font-size:14px;font-weight:700;color:var(--ink);display:block;margin-bottom:3px}
+.pb-text p{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* MARKET SIZING */
+.sizing-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.funnel-card{background:var(--white);border-radius:12px;padding:28px;border:1.5px solid var(--border)}
+.fc-title{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px}
+.fs{display:flex;align-items:center;gap:14px;margin-bottom:14px;position:relative}
+.fs::after{content:'↓';position:absolute;left:13px;bottom:-14px;font-size:11px;color:var(--muted)}
+.fs:last-child::after{display:none}
+.fs-n{width:28px;height:28px;border-radius:6px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);flex-shrink:0;font-weight:500}
+.fs.hi .fs-n{background:var(--blue);color:white;font-weight:700}
+.fs-label{font-size:11px;color:var(--muted);margin-bottom:2px}
+.fs-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)}
+.fs.hi .fs-val{color:var(--blue-dark)}
+.fs-note{font-size:10px;color:var(--muted)}
+.fs-insight{margin-top:16px;padding:12px 14px;background:var(--blue-light);border-radius:6px;border-left:3px solid var(--blue)}
+.fs-insight p{font-size:11px;color:var(--ink-mid);line-height:1.6}
+
+.mkt-stats{display:flex;flex-direction:column;gap:12px}
+.ms{background:var(--white);border-radius:10px;padding:18px 20px;border:1.5px solid var(--border);transition:all 0.2s}
+.ms:hover{border-color:var(--blue);transform:translateX(3px)}
+.ms-val{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--blue-dark)}
+.ms-label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ms-sub{font-size:11px;color:var(--muted)}
+.platform-pills{background:var(--white);border-radius:10px;padding:18px 20px;border:1.5px solid var(--border)}
+.pp-title{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.pp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.pp{border-radius:8px;padding:12px 10px;text-align:center}
+.pp-name{font-size:11px;font-weight:700;margin-bottom:2px}
+.pp-users{font-family:'DM Mono',monospace;font-size:10px}
+
+/* PERSONAS */
+.persona-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
+.persona{background:var(--white);border-radius:12px;padding:22px;border:1.5px solid var(--border);transition:all 0.2s}
+.persona.primary{border-color:var(--blue);border-width:2px}
+.persona:hover{box-shadow:0 6px 24px rgba(0,0,0,0.06)}
+.persona-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;font-weight:500}
+.persona.primary .persona-tag{color:var(--blue)}
+.persona-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.pattrs{display:flex;flex-direction:column;gap:6px}
+.pattr{display:flex;gap:8px;align-items:flex-start}
+.pk{font-size:9px;font-family:'DM Mono',monospace;color:var(--muted);width:64px;flex-shrink:0;padding-top:1px;letter-spacing:0.06em;text-transform:uppercase}
+.pv{font-size:12px;color:var(--ink-mid);line-height:1.45}
+.barrier{display:inline-flex;margin-top:10px;background:var(--red-light);color:var(--red);font-size:10px;padding:4px 10px;border-radius:10px;font-weight:500}
+
+.research-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.rm{background:var(--white);border-radius:10px;padding:16px 14px;border:1.5px solid var(--border);text-align:center;transition:all 0.2s}
+.rm:hover{border-color:var(--blue);transform:translateY(-2px)}
+.rm-icon{font-size:20px;margin-bottom:8px}
+.rm-name{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.rm-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.rm-n{font-family:'DM Mono',monospace;font-size:9px;color:var(--blue-dark);margin-top:6px;letter-spacing:0.06em}
+
+/* PRODUCT - Advantage+ features */
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.feat{background:rgba(255,255,255,0.08);border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,0.12);transition:all 0.2s}
+.feat:hover{background:rgba(255,255,255,0.13);transform:translateY(-2px)}
+.feat-icon{font-size:22px;margin-bottom:12px}
+.feat-name{font-size:14px;font-weight:600;color:white;margin-bottom:6px}
+.feat-bullets{display:flex;flex-direction:column;gap:4px}
+.feat-bullet{font-size:12px;color:rgba(255,255,255,0.55);padding-left:10px;position:relative}
+.feat-bullet::before{content:'·';position:absolute;left:0;color:rgba(24,119,242,0.8)}
+.feat-result{display:inline-flex;margin-top:10px;background:rgba(24,119,242,0.2);color:#82B4FF;font-family:'DM Mono',monospace;font-size:9px;padding:3px 10px;border-radius:6px;letter-spacing:0.08em}
+
+.smb-barrier{background:rgba(255,255,255,0.06);border-radius:12px;padding:24px 28px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:20px}
+.sb-icon{font-size:28px;flex-shrink:0}
+.sb-text strong{color:white;font-size:14px;font-weight:600;display:block;margin-bottom:4px}
+.sb-text p{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.55}
+
+/* GTM PHASES */
+.phases{display:flex;flex-direction:column;gap:10px}
+.phase{background:var(--white);border-radius:10px;border:1.5px solid var(--border);overflow:hidden;transition:all 0.2s}
+.phase:hover{border-color:var(--blue);box-shadow:0 4px 18px rgba(24,119,242,0.07)}
+.phase-hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border)}
+.phase-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--blue-dark);letter-spacing:0.1em;margin-bottom:2px}
+.phase-title{font-size:15px;font-weight:700;color:var(--ink)}
+.phase-target{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--blue-dark)}
+.phase-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.pcol{padding:14px 20px;border-right:1px solid var(--border)}
+.pcol:last-child{border-right:none}
+.pcol-label{font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.ppills{display:flex;flex-wrap:wrap;gap:5px}
+.ppills span{font-size:11px;padding:3px 9px;border-radius:10px;border:1px solid var(--border);color:var(--ink-mid);background:var(--surface)}
+.ppills.kpi span{background:var(--blue-light);color:var(--blue-dark);border-color:rgba(24,119,242,0.15)}
+
+/* MEASUREMENT */
+.meas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.mstage{background:var(--white);padding:20px 16px}
+.mstage-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--blue-dark);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:5px}
+.mstage-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.mkpis{display:flex;flex-direction:column;gap:6px}
+.mkpi{padding:8px 10px;background:var(--surface);border-radius:6px}
+.mkpi strong{display:block;font-size:11px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.mkpi span{font-size:11px;color:var(--muted)}
+.mkpi span.t{color:var(--blue-dark);font-weight:600}
+
+.ns-row{display:flex;gap:20px}
+.ns-main{flex:1;background:var(--blue-light);border-radius:10px;padding:22px 24px;border:1.5px solid rgba(24,119,242,0.2)}
+.ns-tag{font-family:'DM Mono',monospace;font-size:9px;color:var(--blue-dark);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.ns-metric{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.ns-sub{font-size:12px;color:var(--muted)}
+.ns-guards{flex-shrink:0;min-width:280px;background:var(--white);border-radius:10px;padding:20px 22px;border:1.5px solid var(--border)}
+.ns-gr-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px}
+.ns-gr{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)}
+.ns-gr:last-child{border-bottom:none}
+.ns-gr span{font-size:11px;color:var(--ink-mid)}
+.ns-gr strong{font-size:11px;color:var(--blue-dark);font-weight:700}
+
+/* CF */
+.cf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+.cft{background:var(--white);border-radius:10px;padding:20px 16px;border:1.5px solid var(--border);transition:all 0.2s}
+.cft:hover{border-color:var(--blue);transform:translateY(-2px)}
+.cft-icon{font-size:20px;margin-bottom:10px}
+.cft-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.cft-items{display:flex;flex-direction:column;gap:4px}
+.cft-item{font-size:11px;color:var(--muted);padding-left:10px;position:relative;line-height:1.4}
+.cft-item::before{content:'·';position:absolute;left:0;color:var(--blue)}
+.cf-note{background:var(--blue-light);border-radius:8px;padding:14px 18px;border-left:3px solid var(--blue)}
+.cf-note p{font-size:12px;color:var(--ink-mid);line-height:1.6}
+.cf-note strong{color:var(--blue-dark);font-weight:600}
+
+/* FOOTER */
+.footer{background:var(--ink);padding:36px 64px;display:flex;justify-content:space-between;align-items:center}
+.footer-left strong{font-size:14px;font-weight:600;color:white;display:block;margin-bottom:3px}
+.footer-left p{font-size:12px;color:rgba(255,255,255,0.3)}
+.footer-tags{display:flex;gap:10px}
+.ftag{font-family:'DM Mono',monospace;font-size:9px;padding:5px 11px;border:1px solid rgba(255,255,255,0.1);border-radius:5px;color:rgba(255,255,255,0.3);letter-spacing:0.08em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp 0.6s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div id="bb-sidebar" style="position:fixed;top:0;left:0;width:220px;height:100vh;background:#fff;border-right:1px solid #E2DDD8;z-index:8000;display:flex;flex-direction:column;transform:translateX(-220px);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);overflow:hidden;">
+  <!-- Sidebar Header -->
+  <div style="padding:20px 20px 16px;border-bottom:1px solid #E2DDD8;flex-shrink:0;">
+    <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#0D0D0D;letter-spacing:-0.3px;">B<span style="color:#C4622D;">.</span>Bera</div>
+    <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-top:3px;">Portfolio</div>
+  </div>
+  <!-- Nav -->
+  <div style="flex:1;overflow-y:auto;padding:8px 0;">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="if(this.style.borderLeftColor!='rgb(196, 98, 45)'){this.style.background='#f5f5f5';this.style.color='#111';}" onmouseleave="if(this.style.borderLeftColor!='rgb(196, 98, 45)'){this.style.background='transparent';this.style.color='#444';}">
+      <span style="font-size:13px;">🏠</span>
+      <span>Home</span>
+      
+    </a>
+    <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#999;padding:20px 20px 6px;margin-top:4px;">Real Work</div>
+    <a href="nua.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">🌸</span><span>Nua</span></a><a href="oziva.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">🌿</span><span>OZiva</span></a><a href="borosil.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">🫙</span><span>Borosil</span></a>
+    <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#999;padding:20px 20px 6px;">Hypothetical GTM</div>
+    <a href="youtube-premium-lite.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">▶</span><span>YouTube Premium Lite</span></a><a href="meta-ai-whatsapp.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">💬</span><span>Meta AI · WhatsApp</span></a><a href="meta-advantage-plus.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:600;color:#1877F2;text-decoration:none;border-left:2px solid #1877F2;background:#1877F215;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='#1877F215'">
+  <span style="font-size:13px;">📊</span><span>Meta Advantage+</span></a><a href="amazon-now.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">⚡</span><span>Amazon Now</span></a><a href="gemini-workspace.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:12px;font-weight:400;color:#444;text-decoration:none;border-left:2px solid transparent;background:transparent;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background='transparent'">
+  <span style="font-size:13px;">✦</span><span>Gemini Workspace</span></a>
+  </div>
+  <!-- Footer -->
+  <div style="padding:16px 20px;border-top:1px solid #E2DDD8;flex-shrink:0;">
+    <a href="mailto:bhaswatibera07@gmail.com" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;color:#999;text-decoration:none;display:block;transition:color 0.2s;" onmouseenter="this.style.color='#C4622D'" onmouseleave="this.style.color='#999'">bhaswatibera07@gmail.com</a>
+    <a href="https://linkedin.com/in/bhaswati-bera-22948b21b" target="_blank" rel="noreferrer noopener" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;color:#999;text-decoration:none;display:block;margin-top:4px;transition:color 0.2s;" onmouseenter="this.style.color='#C4622D'" onmouseleave="this.style.color='#999'">LinkedIn →</a>
+  </div>
+</div>
+
+<!-- SIDEBAR TOGGLE BUTTON -->
+<button id="bb-toggle" onclick="toggleSidebar()" style="position:fixed;top:16px;left:16px;z-index:9000;width:40px;height:40px;border-radius:8px;background:#fff;border:1.5px solid #E2DDD8;display:flex;align-items:center;justify-content:center;cursor:pointer!important;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.08);" onmouseenter="this.style.background='#0D0D0D';this.style.borderColor='#0D0D0D';document.getElementById('bb-hamburger').style.color='white'" onmouseleave="this.style.background='white';this.style.borderColor='#E2DDD8';document.getElementById('bb-hamburger').style.color='#0D0D0D'">
+  <span id="bb-hamburger" style="font-size:16px;color:#0D0D0D;line-height:1;font-family:monospace;">☰</span>
+</button>
+
+<!-- OVERLAY BACKDROP -->
+<div id="bb-backdrop" onclick="closeSidebar()" style="position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:7999;display:none;backdrop-filter:blur(2px);"></div>
+
+<script>
+function toggleSidebar(){
+  const sb=document.getElementById('bb-sidebar');
+  const bd=document.getElementById('bb-backdrop');
+  const open=sb.style.transform==='translateX(0px)';
+  if(open){
+    sb.style.transform='translateX(-220px)';
+    bd.style.display='none';
+  }else{
+    sb.style.transform='translateX(0px)';
+    bd.style.display='block';
+  }
+}
+function closeSidebar(){
+  document.getElementById('bb-sidebar').style.transform='translateX(-220px)';
+  document.getElementById('bb-backdrop').style.display='none';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+</script>
+
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="meta-logo">
+      <!-- Meta logo: infinity/mobius loop + wordmark -->
+      <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="mg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0081FB"/>
+            <stop offset="100%" stop-color="#0D8EF5"/>
+          </linearGradient>
+        </defs>
+        <path d="M4 17.5C4 15.5 5 13 7.5 13C9.5 13 11 14.5 14 18C17 14.5 18.5 13 20.5 13C23 13 24 15.5 24 17.5C24 20.5 22 22 20.5 22C18.5 22 17 20.5 14 17C11 20.5 9.5 22 7.5 22C6 22 4 20.5 4 17.5Z" fill="none" stroke="url(#mg)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M7.5 13C7.5 10.5 9 8 11 8C12.5 8 13.5 9 14 10C14.5 9 15.5 8 17 8C19 8 20.5 10.5 20.5 13" fill="none" stroke="url(#mg)" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="meta-wordmark">Meta</div>
+    </div>
+    <div class="nav-badge">Hypothetical GTM</div>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="#problem" onclick="event.preventDefault();document.getElementById('problem').scrollIntoView({behavior:'smooth'})">Problem</a>
+    <a class="nav-link" href="#market" onclick="event.preventDefault();document.getElementById('market').scrollIntoView({behavior:'smooth'})">Market</a>
+    <a class="nav-link" href="#research" onclick="event.preventDefault();document.getElementById('research').scrollIntoView({behavior:'smooth'})">Research</a>
+    <a class="nav-link" href="#product" onclick="event.preventDefault();document.getElementById('product').scrollIntoView({behavior:'smooth'})">Product</a>
+    <a class="nav-link" href="#gtm" onclick="event.preventDefault();document.getElementById('gtm').scrollIntoView({behavior:'smooth'})">GTM</a>
+    <a class="nav-link" href="#measurement" onclick="event.preventDefault();document.getElementById('measurement').scrollIntoView({behavior:'smooth'})">Measurement</a>
+    <a class="nav-link" href="#verdict" onclick="event.preventDefault();document.getElementById('verdict').scrollIntoView({behavior:'smooth'})">Verdict</a>
+  </div>
+  <div class="nav-pill">Portfolio · Bhaswati Bera</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-left">
+    <div class="hero-tags fu">
+      <span class="htag hypo">Hypothetical project</span>
+      <span class="htag b2b">B2B · Two-sided market</span>
+    </div>
+    <h1 class="hero-title fu d1">60M SMBs.<br>A trust problem.<br><em>One AI solution.</em></h1>
+    <p class="hero-thesis fu d2">India has 60M+ SMBs. Most advertise on Meta but run campaigns manually — afraid to hand control to "black box" automation. Advantage+ is the highest-performing ad product Meta has built. The GTM challenge: make India's SMBs trust it.</p>
+    <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.7;max-width:400px;margin-bottom:28px;margin-top:-20px;">All data sourced from Meta's public earnings disclosures, Ministry of MSME 2024 figures, and third-party market research. Research methods in Section 03 are designed frameworks — this is a portfolio exercise, not internal data.</p>
+    <div class="hero-meta fu d3">
+      <div class="hmi"><div class="hmi-key">Product</div><div class="hmi-val">Meta Advantage+</div></div>
+      <div class="hmi"><div class="hmi-key">Segment</div><div class="hmi-val">India SMBs</div></div>
+      <div class="hmi"><div class="hmi-key">Goal</div><div class="hmi-val">2M SMBs · 12 months</div></div>
+    </div>
+    <button class="btn-white fu d4" onclick="document.getElementById('problem').scrollIntoView({behavior:'smooth'})">View strategy ↓</button>
+  </div>
+  <div class="hero-right fu d2">
+    <div class="hstat featured">
+      <div class="hstat-label">Advantage+ annual run rate</div>
+      <div class="hstat-val">$20B+</div>
+      <div class="hstat-sub">70% YoY growth · 4M+ advertisers globally</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-label">India Facebook MAUs</div>
+      <div class="hstat-val">448M</div>
+      <div class="hstat-sub">#1 in the world · 363M on Instagram</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-label">India SMBs on Meta platforms</div>
+      <div class="hstat-val">60M+</div>
+      <div class="hstat-sub">Most use WhatsApp Business · few use Advantage+</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-label">Advantage+ CPA improvement</div>
+      <div class="hstat-val">9%</div>
+      <div class="hstat-sub">Lower cost per action vs manual campaigns</div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 PROBLEM -->
+<section class="sec alt" id="problem">
+  <div class="sec-inner">
+    <div class="sec-chip">01 — The two-sided market problem</div>
+    <h2 class="sec-h">A product that works. <span>A market that doesn't trust it.</span></h2>
+    <div class="two-sided">
+      <div class="side smb">
+        <div class="side-label">SMB advertiser side</div>
+        <div class="side-title">What Indian SMBs feel</div>
+        <div class="side-items">
+          <div class="side-item problem">"I don't understand what the AI is doing with my budget"</div>
+          <div class="side-item problem">Fear of losing control over targeting and spend</div>
+          <div class="side-item problem">No Hindi/regional language onboarding or support</div>
+          <div class="side-item problem">Previous bad experience with boosted posts wasting money</div>
+          <div class="side-item problem">Distrust of "black box" — can't explain results to owner</div>
+        </div>
+      </div>
+      <div class="middle-arrow">
+        <div class="ma-line"></div>
+        <div class="ma-icon">⚡</div>
+        <div class="ma-label">Advantage+ bridge</div>
+        <div class="ma-line"></div>
+      </div>
+      <div class="side user">
+        <div class="side-label">User/consumer side</div>
+        <div class="side-title">What better ads deliver</div>
+        <div class="side-items">
+          <div class="side-item good">More relevant ads = higher engagement</div>
+          <div class="side-item good">Local business discovery in feed</div>
+          <div class="side-item good">WhatsApp click-to-message = direct purchase</div>
+          <div class="side-item good">Regional language ads reaching right audience</div>
+          <div class="side-item good">SMB growth = more jobs, stronger local economy</div>
+        </div>
+      </div>
+    </div>
+    <div class="problem-banner">
+      <div class="pb-icon">🔑</div>
+      <div class="pb-text">
+        <strong>The insight: this is an education and trust problem, not a product problem</strong>
+        <p>Advantage+ already delivers 9% lower CPA. Meta's own field research in India confirmed SMBs struggle with the advertising interface — not because it doesn't work, but because they don't understand it. The GTM job is trust-building, not feature-selling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 MARKET SIZING -->
+<section class="sec" id="market">
+  <div class="sec-inner">
+    <div class="sec-chip">02 — Market sizing</div>
+    <h2 class="sec-h">Bottom-up. <span>SMB by SMB.</span></h2>
+    <div class="sizing-grid">
+      <div class="funnel-card">
+        <div class="fc-title">Advantage+ India addressable market</div>
+        <div class="fs">
+          <div class="fs-n">01</div>
+          <div><div class="fs-label">India SMBs total</div><div class="fs-val">~63M</div><div class="fs-note">Registered MSMEs · Ministry of MSME 2024</div></div>
+        </div>
+        <div class="fs">
+          <div class="fs-n">02</div>
+          <div><div class="fs-label">SMBs with digital presence</div><div class="fs-val">~30M</div><div class="fs-note">Active on at least one Meta platform</div></div>
+        </div>
+        <div class="fs">
+          <div class="fs-n">03</div>
+          <div><div class="fs-label">Currently running Meta ads (any type)</div><div class="fs-val">~8M</div><div class="fs-note">~27% of digitally active — boosted posts + campaigns</div></div>
+        </div>
+        <div class="fs">
+          <div class="fs-n">04</div>
+          <div><div class="fs-label">Spending ≥ ₹500/day · addressable budget</div><div class="fs-val">~3M</div><div class="fs-note">Sufficient budget to meaningfully run Advantage+</div></div>
+        </div>
+        <div class="fs hi">
+          <div class="fs-n">SAM</div>
+          <div><div class="fs-label">Switchable to Advantage+</div><div class="fs-val">3M SMBs</div><div class="fs-note">Y1 target: 2M (66% of SAM) = $240M+ incremental ARR</div></div>
+        </div>
+        <div class="fs-insight">
+          <p><strong>Key insight:</strong> These 3M SMBs are already paying Meta. The GTM converts existing spend to a higher-performing product — no new customer acquisition needed.</p>
+        </div>
+      </div>
+      <div class="mkt-stats">
+        <div class="ms">
+          <div class="ms-val">$160B+</div>
+          <div class="ms-label">Meta global ad revenue 2024</div>
+          <div class="ms-sub">India is top-5 market by user volume</div>
+        </div>
+        <div class="ms">
+          <div class="ms-val">70%</div>
+          <div class="ms-label">Advantage+ YoY growth globally</div>
+          <div class="ms-sub">Fastest-growing product in Meta's ad portfolio</div>
+        </div>
+        <div class="ms">
+          <div class="ms-val">200M+</div>
+          <div class="ms-label">WhatsApp Business MAUs globally</div>
+          <div class="ms-sub">India is #1 — the trust layer already exists</div>
+        </div>
+        <div class="platform-pills">
+          <div class="pp-title">Meta platform reach · India 2024</div>
+          <div class="pp-grid">
+            <div class="pp" style="background:#E7F0FD">
+              <div class="pp-name" style="color:var(--blue)">Facebook</div>
+              <div class="pp-users" style="color:var(--blue-dark)">448M MAUs</div>
+            </div>
+            <div class="pp" style="background:var(--instagram-light)">
+              <div class="pp-name" style="color:var(--instagram)">Instagram</div>
+              <div class="pp-users" style="color:var(--instagram)">363M MAUs</div>
+            </div>
+            <div class="pp" style="background:var(--whatsapp-light)">
+              <div class="pp-name" style="color:var(--green)">WhatsApp</div>
+              <div class="pp-users" style="color:var(--green)">500M+ MAUs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 USER RESEARCH -->
+<section class="sec alt" id="research">
+  <div class="sec-inner">
+    <div class="sec-chip">03 — User research</div>
+    <h2 class="sec-h">Three SMB types. <span>Three different barriers.</span></h2>
+    <p style="font-size:13px;color:var(--muted);line-height:1.7;max-width:720px;margin-bottom:28px;">This is the research design I would run — not data I've collected. The methods are chosen specifically because B2B adoption in India requires different research than consumer GTM: depth interviews reveal the emotional barrier to automation, the A/B experiment generates the proof data needed to overcome it, the WhatsApp survey reaches SMB owners in their language, and agency interviews uncover the channel blocker that could kill adoption at scale. Personas are built from public data on Indian SMB digital behaviour and Meta's disclosed field research findings.</p>
+    <div class="persona-grid">
+      <div class="persona primary">
+        <div class="persona-tag">Primary ICP</div>
+        <div class="persona-name">Suresh, 38 · D2C founder · Surat</div>
+        <div class="pattrs">
+          <div class="pattr"><div class="pk">Business</div><div class="pv">Fashion D2C · ₹30L/year revenue · runs Facebook + Instagram ads himself</div></div>
+          <div class="pattr"><div class="pk">Behaviour</div><div class="pv">Manually sets interests, ages, cities · checks campaign every 2 hours</div></div>
+          <div class="pattr"><div class="pk">Pain</div><div class="pv">"When I let Meta decide the audience, my budget disappears with no sales"</div></div>
+          <div class="pattr"><div class="pk">Trigger</div><div class="pv">Sees competitor getting better ROAS — wants proof before switching</div></div>
+          <div class="pattr"><div class="pk">Stays because</div><div class="pv">The side-by-side ROAS comparison in-app shows him exactly what the AI did and why. Transparency replaces the black box. Once he sees the logic, control anxiety drops.</div></div>
+        </div>
+        <div class="barrier">Needs proof of control, not removal of it</div>
+      </div>
+      <div class="persona">
+        <div class="persona-tag" style="color:var(--muted)">Secondary ICP</div>
+        <div class="persona-name">Meena, 45 · Restaurant owner · Chennai</div>
+        <div class="pattrs">
+          <div class="pattr"><div class="pk">Business</div><div class="pv">3 locations · uses WhatsApp Business daily · never run paid ads</div></div>
+          <div class="pattr"><div class="pk">Behaviour</div><div class="pv">Posts on Instagram organically · gets customers via WhatsApp DMs</div></div>
+          <div class="pattr"><div class="pk">Pain</div><div class="pv">"I don't know how to start with ads. Too complicated, too risky."</div></div>
+          <div class="pattr"><div class="pk">Trigger</div><div class="pv">Wants more delivery orders · nearby competitor advertising more</div></div>
+          <div class="pattr"><div class="pk">Stays because</div><div class="pv">WhatsApp-based onboarding means she never had to leave a familiar surface. First delivery order from a paid ad is the retention moment — tangible, attributed, immediate.</div></div>
+        </div>
+        <div class="barrier" style="background:var(--amber-light);color:var(--amber)">First-time advertiser — needs simplicity</div>
+      </div>
+      <div class="persona">
+        <div class="persona-tag" style="color:var(--muted)">Tertiary ICP · Highest leverage</div>
+        <div class="persona-name">Vikram, 32 · Agency owner · Bengaluru</div>
+        <div class="pattrs">
+          <div class="pattr"><div class="pk">Business</div><div class="pv">Manages ads for 20 SMB clients · ₹50L+ total monthly ad spend</div></div>
+          <div class="pattr"><div class="pk">Behaviour</div><div class="pv">Advanced Meta Ads user · skeptical of automation eating his value</div></div>
+          <div class="pattr"><div class="pk">Pain</div><div class="pv">"If Advantage+ does everything, what do clients pay me for?"</div></div>
+          <div class="pattr"><div class="pk">Trigger</div><div class="pv">Client asks about Advantage+ after reading a blog post</div></div>
+          <div class="pattr"><div class="pk">Stays because</div><div class="pv">The certification programme reframes his value: he's no longer the person who sets targeting manually — he's the strategist who knows when to use AI and how to read the results. Advantage+ makes him look smarter to clients, not replaceable. Convert Vikram once, he converts 20 SMBs.</div></div>
+        </div>
+        <div class="barrier" style="background:var(--green-light);color:var(--green)">Agency multiplier — convert him, convert 20 SMBs</div>
+      </div>
+    </div>
+    <div class="research-grid">
+      <div class="rm"><div class="rm-icon">🎙️</div><div class="rm-name">SMB depth interviews</div><div class="rm-desc">Current Meta advertisers · why they avoid automation</div><div class="rm-n">N=40 · qualitative</div></div>
+      <div class="rm"><div class="rm-icon">📊</div><div class="rm-name">A/B: manual vs Advantage+</div><div class="rm-desc">Same budget · same creative · different campaign type</div><div class="rm-n">N=5K SMBs · experiment</div></div>
+      <div class="rm"><div class="rm-icon">📱</div><div class="rm-name">WhatsApp survey</div><div class="rm-desc">Language-matched survey to SMB owners in 6 languages</div><div class="rm-n">N=2K · quantitative</div></div>
+      <div class="rm"><div class="rm-icon">🏪</div><div class="rm-name">Agency interviews</div><div class="rm-desc">What do agencies tell clients about automation?</div><div class="rm-n">N=25 agencies · qual</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PRODUCT -->
+<section class="sec dark" id="product">
+  <div class="sec-inner">
+    <div class="sec-chip">04 — Product: what Advantage+ actually does</div>
+    <h2 class="sec-h">The AI handles the <span>heavy lifting.</span></h2>
+    <div class="product-grid">
+      <div class="feat">
+        <div class="feat-icon">🎯</div>
+        <div class="feat-name">Advantage+ Audience</div>
+        <div class="feat-bullets">
+          <div class="feat-bullet">AI finds buyers beyond set interests</div>
+          <div class="feat-bullet">Learns from pixel + conversion signals</div>
+          <div class="feat-bullet">Expands automatically as it learns</div>
+        </div>
+        <div class="feat-result">Avg 28% more conversions</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🎨</div>
+        <div class="feat-name">Advantage+ Creative</div>
+        <div class="feat-bullets">
+          <div class="feat-bullet">Auto-generates image/text variations</div>
+          <div class="feat-bullet">Tests combinations at scale</div>
+          <div class="feat-bullet">Serves best variant per user</div>
+        </div>
+        <div class="feat-result">9% lower CPA on average</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">💰</div>
+        <div class="feat-name">Advantage+ Budget</div>
+        <div class="feat-bullets">
+          <div class="feat-bullet">Shifts spend to best-performing ad sets</div>
+          <div class="feat-bullet">No manual budget micro-management</div>
+          <div class="feat-bullet">Optimises toward your conversion goal</div>
+        </div>
+        <div class="feat-result">32% reduction in cost per result vs manual bidding</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🛍️</div>
+        <div class="feat-name">Advantage+ Shopping</div>
+        <div class="feat-bullets">
+          <div class="feat-bullet">Auto-catalogue ads for D2C brands</div>
+          <div class="feat-bullet">Dynamic product ads per user intent</div>
+          <div class="feat-bullet">Retargeting + prospecting in one campaign</div>
+        </div>
+        <div class="feat-result">$20B+ annual run rate globally</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">💬</div>
+        <div class="feat-name">Click-to-WhatsApp</div>
+        <div class="feat-bullets">
+          <div class="feat-bullet">Ad → WhatsApp conversation in one tap</div>
+          <div class="feat-bullet">Highest-converting format for India SMBs</div>
+          <div class="feat-bullet">AI qualifies leads before human follow-up</div>
+        </div>
+        <div class="feat-result">50% YoY growth in India</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📊</div>
+        <div class="feat-name">Advantage+ Reporting</div>
+        <div class="feat-bullets">
+          <div class="feat-bullet">Plain-language performance summaries</div>
+          <div class="feat-bullet">AI explains what worked and why</div>
+          <div class="feat-bullet">Hindi + regional language reports</div>
+        </div>
+        <div class="feat-result">Transparency = trust = retention</div>
+      </div>
+    </div>
+    <div class="smb-barrier">
+      <div class="sb-icon">🇮🇳</div>
+      <div class="sb-text">
+        <strong>India-specific unlock: make Advantage+ explainable in the SMB's language — literally</strong>
+        <p>Meta's research confirmed Indian SMBs struggle with the interface. The fix isn't the product — it's localised onboarding, WhatsApp-based support in Hindi/Tamil/Telugu, and plain-language performance explanations that a business owner can actually act on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 GTM -->
+<section class="sec" id="gtm">
+  <div class="sec-inner">
+    <div class="sec-chip">05 - GTM Plan</div>
+<h2 class="sec-h">12 months. <span>3 phases.</span></h2>
+<p style="font-size:13px;color:#7A7A7A;line-height:1.75;max-width:760px;margin-bottom:28px;">3M Indian SMBs are already paying Meta. The GTM converts existing spend to a higher-performing product - no new customer acquisition needed. Phase 1 builds proof and trust. Phase 2 uses the agency channel as a force multiplier. Phase 3 locks retention through radical transparency.</p>
+
+<!-- AGENCY CHANNEL LOGIC — WHY VIKRAM IS THE STRATEGY, NOT A CHANNEL -->
+<div style="background:#1877F2;border-radius:12px;padding:24px 28px;margin-bottom:28px;display:grid;grid-template-columns:2fr 1fr;gap:24px;align-items:start;">
+  <div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Why the agency channel is the centrepiece, not a line item</div>
+    <p style="font-size:14px;font-weight:600;color:white;margin-bottom:8px;line-height:1.4;">Vikram isn't a persona. He's a distribution node.</p>
+    <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7;">An agency owner in Bengaluru manages 20 SMB ad accounts. If Vikram fears Advantage+ makes him redundant, he actively recommends against it to 20 clients simultaneously — turning a potential advocate into an active blocker at zero cost to the competitor. If he's converted, the reverse is true: 20 SMB activations at zero additional CAC, each with pre-built trust because their trusted advisor certified the product. <strong style="color:white;">500 Vikrams = 10,000 zero-CAC SMB activations.</strong> That's why Phase 2 isn't "add agencies as a channel" — it's "make the agency channel the compounding mechanism that makes Phase 3 possible without proportional spend increase."</p>
+    <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,0.6);padding:10px 14px;background:rgba(255,255,255,0.1);border-radius:6px;border-left:2px solid rgba(255,255,255,0.4);">The certification programme also reframes Vikram's professional identity: he's no longer the person who sets targeting manually — he's the AI strategy person who reads results and makes calls the algorithm can't. This resolves his core fear (being replaced) by making the product central to his pitch. That's not a sales tactic. It's a GTM insight.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px;text-align:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:white;">500</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;">Certified agencies</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px;text-align:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:white;">×15</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;">SMBs per agency</div>
+    </div>
+    <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px;text-align:center;border:1px solid rgba(255,255,255,0.2);">
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:white;">7,500</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.6);margin-top:2px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;">Zero-CAC activations</div>
+    </div>
+  </div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-bottom:28px;"><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M1</div><div style="font-size:9px;line-height:1.3;font-weight:500;">Case study content</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M2</div><div style="font-size:9px;line-height:1.3;font-weight:500;">WA onboarding</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M3</div><div style="font-size:9px;line-height:1.3;font-weight:500;">A/B trial launch</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M4</div><div style="font-size:9px;line-height:1.3;font-weight:500;">SMB interviews</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M5</div><div style="font-size:9px;line-height:1.3;font-weight:500;">Agency cert.</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M6</div><div style="font-size:9px;line-height:1.3;font-weight:500;">ET/YourStory PR</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M7</div><div style="font-size:9px;line-height:1.3;font-weight:500;">SMB community</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M8</div><div style="font-size:9px;line-height:1.3;font-weight:500;">Micro-influencers</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M9</div><div style="font-size:9px;line-height:1.3;font-weight:500;">Regional expand.</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M10</div><div style="font-size:9px;line-height:1.3;font-weight:500;">Transparency digest</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M11</div><div style="font-size:9px;line-height:1.3;font-weight:500;">Referral launch</div></div><div style="background:#1877F2;color:white;border-radius:6px;padding:10px 6px;text-align:center;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.06em;margin-bottom:4px;opacity:0.8;">M12</div><div style="font-size:9px;line-height:1.3;font-weight:500;">Advocacy scale</div></div></div>
+<div style="display:flex;flex-direction:column;gap:14px;margin-bottom:40px;"><div style="background:#fff;border-radius:14px;border:1.5px solid #E2DDD8;overflow:hidden;">
+  <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid #E2DDD8;">
+    <div style="font-family:monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#1877F2;background:#1877F212;padding:5px 12px;border-radius:5px;white-space:nowrap;">Phase 01 &middot; M1-4</div>
+    <div style="font-size:16px;font-weight:700;color:#0D0D0D;">Build Trust</div>
+    <div style="font-size:24px;font-weight:700;color:#1877F2;">200K SMBs</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+    <div style="padding:20px 22px;border-right:1px solid #E2DDD8;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">Channels</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Indian SMB ROAS case study content</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">WhatsApp onboarding in regional language</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">In-platform A/B trial: manual vs Advantage+</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">SMB micro-influencer seeding</div></div></div>
+    <div style="padding:20px 22px;border-right:1px solid #E2DDD8;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">Messaging</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">"Suresh (Surat fashion) got 9% lower CPA. Side-by-side."</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">"Your first Advantage+ campaign is ready. Here is what the AI does with 500 rupees."</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Same budget, same creative - you see the difference in-app</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">I was afraid to give AI my budget. Here is what happened.</div></div></div>
+    <div style="padding:20px 22px;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">KPIs</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">60% case study content completion</div><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">WA onboarding completion 40%+</div><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">70% of trial SMBs stay post-trial</div></div></div>
+  </div>
+</div><div style="background:#fff;border-radius:14px;border:1.5px solid #E2DDD8;overflow:hidden;">
+  <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid #E2DDD8;">
+    <div style="font-family:monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#1877F2;background:#1877F212;padding:5px 12px;border-radius:5px;white-space:nowrap;">Phase 02 &middot; M5-8</div>
+    <div style="font-size:16px;font-weight:700;color:#0D0D0D;">Agency Multiplier</div>
+    <div style="font-size:24px;font-weight:700;color:#1877F2;">1M SMBs</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+    <div style="padding:20px 22px;border-right:1px solid #E2DDD8;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">Channels</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">"Advantage+ Certified Partner" agency programme</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">ET, YourStory, Inc42 PR + business media</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Paid social targeted to SMB owners</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">B2B WhatsApp group + association tie-ups</div></div></div>
+    <div style="padding:20px 22px;border-right:1px solid #E2DDD8;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">Messaging</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">You are the strategist who knows when to use AI - not the targeting person.</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">"How Indian SMBs are using AI to compete with enterprise ad budgets"</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">The ROAS you get manually? The AI gets 9% better.</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Association-endorsed: regional language, peer-to-peer proof</div></div></div>
+    <div style="padding:20px 22px;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">KPIs</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">500 certified agencies</div><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">15+ PR publications in M4</div><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">Agency channel: 7,500 zero-CAC activations</div></div></div>
+  </div>
+</div><div style="background:#fff;border-radius:14px;border:1.5px solid #E2DDD8;overflow:hidden;">
+  <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid #E2DDD8;">
+    <div style="font-family:monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#1877F2;background:#1877F212;padding:5px 12px;border-radius:5px;white-space:nowrap;">Phase 03 &middot; M9-12</div>
+    <div style="font-size:16px;font-weight:700;color:#0D0D0D;">Transparency and Retain</div>
+    <div style="font-size:24px;font-weight:700;color:#1877F2;">2M SMBs</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+    <div style="padding:20px 22px;border-right:1px solid #E2DDD8;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">Channels</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Weekly WhatsApp performance digest</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Referral: Tell an SMB friend</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">B2B community advocacy content</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Churn win-back transparency campaign</div></div></div>
+    <div style="padding:20px 22px;border-right:1px solid #E2DDD8;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">Messaging</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Your ads reached 4,200 people. AI shifted to Reels - buyers were there Tuesday.</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Tell a fellow SMB, 500 rupee ad credit for both</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Suresh managed ads 2 hrs/day. Now 20 minutes. - advocacy UGC</div><div style="font-size:12px;color:#2E2E2E;padding:7px 12px;background:#F0EDE8;border-radius:6px;border:1px solid #E2DDD8;line-height:1.4;">Win-back: The AI did not stop. You did. Come back.</div></div></div>
+    <div style="padding:20px 22px;"><div style="font-family:monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:12px;">KPIs</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">D60 retention 67%+</div><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">Referral K-factor 0.2+</div><div style="font-size:12px;color:#1877F2;padding:7px 12px;background:#1877F212;border-radius:6px;border:1px solid #1877F225;font-weight:600;line-height:1.4;">Do not understand churn reason below 10%</div></div></div>
+  </div>
+</div></div>
+<div style="background:#111;border-radius:14px;padding:32px 36px;overflow-x:auto;">
+  <div style="font-family:monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:20px;">Channel Breakdown &middot; Tactic &middot; Messaging &middot; Rationale</div>
+  <table style="width:100%;border-collapse:collapse;min-width:680px;">
+    <thead><tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+      <th style="text-align:left;font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:0 20px 10px 0;font-weight:400;white-space:nowrap;">Channel</th>
+      <th style="text-align:left;font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:0 20px 10px;font-weight:400;">Tactic</th>
+      <th style="text-align:left;font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:0 20px 10px;font-weight:400;">Messaging Direction</th>
+      <th style="text-align:left;font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:0 0 10px 20px;font-weight:400;">Why This Channel</th>
+    </tr></thead>
+    <tbody><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">📚</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">Content Marketing (Trust)</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">"See Advantage+ work" Indian SMB case studies</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">"Suresh (Surat fashion) got 9% lower CPA and kept full control. Here is the side-by-side." Video + WA.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">Indian SMBs trust proof over promises. Same city, same category case study converts best.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">📱</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">WhatsApp Marketing</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">5-step guided onboarding in regional language</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">"Your first Advantage+ campaign is ready. Here is what the AI will do with your 500 rupees."</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">WA onboarding completion 40% vs 18% on standard web flow. Familiar surface removes friction.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">⚡</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">Performance (Proof)</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">In-platform A/B: manual vs Advantage+</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Same budget, same creative. ROAS comparison shown at D14 and D30 inside the platform.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">The product is the campaign. 70% of trial SMBs stay when they see their own data.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">🤝</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">Partnership / Agency</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">"Advantage+ Certified Partner" programme</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">You are no longer the targeting person - you are the AI strategy person. Reframes agency value.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">Convert Vikram once, he converts 20 SMBs. 500 agencies times 15 SMBs = 7,500 zero-CAC activations.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">📣</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">PR / Business Media</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">ET, YourStory, Inc42 + SMB founder stories</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">"How Indian SMBs are using AI to compete with enterprise ad budgets." Suresh as spokesperson.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">Business media credibility removes "Meta is just after my money" before the sales conversation.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">👥</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">B2B Community</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">WhatsApp groups + business association tie-ups</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">"See how Meena (Chennai restaurant) got her first delivery order in 3 days." Group-shared.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">SMBs trust other SMBs more than Meta. Community-distributed social proof is highest-converting.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">🧑</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">SMB Micro-Influencers</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">SMB founders as paid micro-influencers</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">I was afraid to give the AI my budget. Here is what happened. Authentic, UTM tracked.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">SMB peer voices in vernacular convert the Suresh-type objection no Meta creative can address.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">🔁</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">Retention / Lifecycle</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">Weekly WhatsApp plain-language performance digest</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Your ads reached 4,200 people. The AI shifted budget to Reels because buyers were there Tuesday.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">Transparency is the retention mechanic. An SMB who understands what Advantage+ is doing stays.</td>
+</tr><tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+  <td style="padding:14px 20px 14px 0;vertical-align:top;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:15px;">🔗</span><span style="font-family:monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;background:#1877F21A;padding:3px 8px;border-radius:3px;white-space:nowrap;">Referral</span></div></td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:12px;font-weight:600;color:white;line-height:1.5;">Tell a fellow SMB, 500 rupee ad credit for both</td>
+  <td style="padding:14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Triggered after 3rd successful campaign (peak satisfaction). Regional language WA sharing mechanic.</td>
+  <td style="padding:14px 0 14px 20px;vertical-align:top;font-size:11px;color:rgba(255,255,255,0.32);line-height:1.6;font-style:italic;">K-factor 0.2 target. Vikram-tier SMBs refer their entire peer network once they trust the product.</td>
+</tr></tbody>
+  </table>
+</div>
+<div style="border-left:3px solid #1877F2;padding:20px 28px;background:#1877F20A;border-radius:0 10px 10px 0;margin-top:20px;">
+  <div style="font-family:monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#1877F2;margin-bottom:10px;">My POV</div>
+  <p style="font-size:16px;font-style:italic;color:#0D0D0D;line-height:1.65;max-width:860px;">Advantage+ India is a trust problem wearing a product problem's clothes. The AI works - 9% lower CPA, globally proven. The GTM does not need to prove the product. It needs to dismantle the black-box fear. Every channel is an education vehicle, not a feature announcement. Content shows proof. WhatsApp onboarding removes complexity. The A/B trial makes the product the campaign. The agency channel multiplies. Transparency-led lifecycle retention eliminates the do not understand churn reason.</p>
+</div>
+  </div>
+</section>
+
+<section class="sec dark" id="crossfunctional">
+  <div class="sec-inner">
+    <div class="sec-chip">07 — Cross-functional GTM</div>
+    <h2 class="sec-h">Marketing doesn't <span>launch alone.</span></h2>
+    <div class="cf-grid">
+      <div class="cft">
+        <div class="cft-icon">⚙️</div>
+        <div class="cft-name">Product & Engineering</div>
+        <div class="cft-items">
+          <div class="cft-item">Hindi + regional UI for Ads Manager</div>
+          <div class="cft-item">WhatsApp-native onboarding flow</div>
+          <div class="cft-item">Plain-language AI performance explanations</div>
+          <div class="cft-item">In-app side-by-side ROAS comparison</div>
+        </div>
+      </div>
+      <div class="cft">
+        <div class="cft-icon">🤝</div>
+        <div class="cft-name">Partnerships & BD</div>
+        <div class="cft-items">
+          <div class="cft-item">Agency certification programme</div>
+          <div class="cft-item">Jio / Airtel SMB bundle integration</div>
+          <div class="cft-item">HDFC / ICICI cashback on ad spend</div>
+          <div class="cft-item">MSME ministry co-marketing</div>
+        </div>
+      </div>
+      <div class="cft">
+        <div class="cft-icon">📐</div>
+        <div class="cft-name">Data & Analytics</div>
+        <div class="cft-items">
+          <div class="cft-item">SMB churn propensity model</div>
+          <div class="cft-item">CPA lift measurement per category</div>
+          <div class="cft-item">Agency performance leaderboard</div>
+          <div class="cft-item">Regional language performance segmentation</div>
+        </div>
+      </div>
+      <div class="cft">
+        <div class="cft-icon">🎨</div>
+        <div class="cft-name">Creative & Brand</div>
+        <div class="cft-items">
+          <div class="cft-item">SMB success stories per category + city</div>
+          <div class="cft-item">6-language campaign localisation</div>
+          <div class="cft-item">Agency training deck + certification kit</div>
+          <div class="cft-item">WhatsApp broadcast creative templates</div>
+        </div>
+      </div>
+    </div>
+    <div class="cf-note">
+      <p><strong>PMM's unique role in a two-sided market:</strong> on one side, the SMB advertiser who needs trust and education. On the other, the user who needs relevant ads, not spam. Every channel decision, product brief, and measurement framework must balance both sides — if Advantage+ makes SMBs spend more but degrades user ad experience, we've failed. That tension is PMM's to hold.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="verdict">
+  <div class="sec-inner">
+    <div class="sec-chip">What this strategy taught me</div>
+    <h2 class="sec-h">B2B trust is harder than <span>consumer habit.</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div style="background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border);">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">The two-sided market lesson</div>
+        <p style="font-size:13px;color:var(--ink-mid);line-height:1.75;">Consumer GTM is about creating desire. B2B GTM in a two-sided market is about removing fear on one side without degrading experience on the other. The SMB's fear of the black box and the user's right to relevant ads are not separate problems — they're the same problem from opposite directions. The GTM that solves both simultaneously is the only one that works long-term. That's the tension PMM has to hold, and it's a more complex brief than anything in a single-sided market.</p>
+      </div>
+      <div style="background:var(--white);border-radius:14px;padding:28px;border:1.5px solid var(--border);">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">The Vikram insight that changes the strategy</div>
+        <p style="font-size:13px;color:var(--ink-mid);line-height:1.75;">Vikram is the most important persona in this document — and the easiest to overlook because he's not the end customer. But an agency owner who fears automation is an active blocker recommending against adoption to 20 clients simultaneously. The moment I realised the GTM needed to sell Vikram a new professional identity — not just a better product — was when the agency certification programme made strategic sense beyond a sales channel. That's the kind of insight that doesn't show up in a feature brief.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left"><strong>Bhaswati Bera</strong><p>bhaswatibera07@gmail.com · linkedin.com/in/bhaswatibera-22948b21b</p></div>
+  <div style="font-size:13px;color:rgba(255,255,255,0.35);max-width:420px;line-height:1.6;text-align:right;">The product works. The market doesn't trust it yet. Closing that gap is the job — and it's a more interesting problem than building the product in the first place.</div>
+</footer>
+
+
+<section style="background:#F0F6FF;padding:80px 64px;" id="campaign-mix">
+  <div style="max-width:1140px;margin:0 auto;">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.05);color:#1877F2;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;padding:5px 14px;border-radius:20px;text-transform:uppercase;margin-bottom:14px;">Full Marketing Mix · Campaign Playbook</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,40px);font-weight:700;line-height:1.1;letter-spacing:-0.8px;margin-bottom:16px;color:#1A1A1A;">What I'd Run — <span style="color:#1877F2;">The Complete GTM Mix</span></h2>
+    <p style="font-size:14px;color:#888;line-height:1.8;max-width:780px;margin-bottom:44px;">Meta Advantage+ is a trust problem disguised as a product problem. The AI already works — 9% lower CPA, globally proven. India's 3M addressable SMBs are already spending on Meta. The GTM job: make them trust the black box. Every channel is an education vehicle, not a feature announcement.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+      <div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e8e8e8;">
+      <div style="font-size:17px;margin-bottom:10px;">🏫</div>
+      <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Content Marketing + Education — Trust Before Features</div>
+      <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">"Show me it works before I give it my budget." That's the Indian SMB mindset. The GTM starts with content that demonstrates, not explains. ROAS case studies from Indian SMBs (same industry, same city where possible) are more credible than any product spec.</div>
+      <div style="background:#F0F6FF;border-radius:8px;padding:14px;border-left:2px solid #1877F2;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;margin-bottom:6px;">Campaign Brief</div>
+        <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">"See Advantage+ work" content series: 10 Indian SMB case studies (fashion Surat, restaurant Chennai, D2C Delhi). Format: WhatsApp video (30s), YouTube (2min). Distribution: in-app Meta notification + Facebook Reels. Target: 60% content completion rate, 25% CTA click to "Try Advantage+".</div>
+      </div>
+    </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e8e8e8;">
+      <div style="font-size:17px;margin-bottom:10px;">📱</div>
+      <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">WhatsApp Marketing — Meet SMBs Where They Already Are</div>
+      <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">India's SMBs live on WhatsApp Business. The most credible Advantage+ onboarding happens in a familiar interface — not a new dashboard they've never seen. WhatsApp-based onboarding reduces the "too complicated" objection by 60% (Meta's own field data).</div>
+      <div style="background:#F0F6FF;border-radius:8px;padding:14px;border-left:2px solid #1877F2;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;margin-bottom:6px;">Campaign Brief</div>
+        <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">WhatsApp onboarding flow: 5-step guided setup in Hindi/regional language. "Your first Advantage+ campaign is ready. Here's what the AI will do with your ₹500." Transparent AI logic explained in plain language. Target: 40% completion rate on WhatsApp onboarding vs 18% on standard web flow.</div>
+      </div>
+    </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e8e8e8;">
+      <div style="font-size:17px;margin-bottom:10px;">🤝</div>
+      <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Partner & Agency Marketing — Vikram is a Force Multiplier</div>
+      <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">One certified agency (Vikram, Bengaluru, 20 SMB clients) converts 20 SMBs. The agency channel is the Phase 2 force multiplier — it's why 200K SMBs in Phase 1 becomes 1M in Phase 2 without proportional spend increase.</div>
+      <div style="background:#F0F6FF;border-radius:8px;padding:14px;border-left:2px solid #1877F2;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;margin-bottom:6px;">Campaign Brief</div>
+        <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Agency certification programme: "Advantage+ Certified Partner" — reframes agency value from manual targeting to AI strategy. Training: 2-day workshop, exam, badge. Benefits: priority support, co-marketing, client referrals. Target: 500 certified agencies by M6 → each converts 15 SMBs = 7,500 SMB activations from the agency channel alone.</div>
+      </div>
+    </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e8e8e8;">
+      <div style="font-size:17px;margin-bottom:10px;">⚡</div>
+      <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Performance Marketing — Prove It Side-by-Side</div>
+      <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">The only thing that converts a skeptical SMB is seeing their own data. The A/B test — same budget, same creative, Advantage+ vs manual — is both the research method and the marketing campaign. The proof data becomes the ad.</div>
+      <div style="background:#F0F6FF;border-radius:8px;padding:14px;border-left:2px solid #1877F2;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;margin-bottom:6px;">Campaign Brief</div>
+        <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">In-platform A/B: 5K SMBs get free "Advantage+ trial month" with their existing budget. In-app ROAS comparison shown at D14 and D30. Best results (top 20%) become the case study ads for Phase 2. Target: 70% of trial SMBs stay on Advantage+ post-trial. The product is the campaign.</div>
+      </div>
+    </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e8e8e8;">
+      <div style="font-size:17px;margin-bottom:10px;">📣</div>
+      <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">PR + Influencer — Indian Business Media Narrative</div>
+      <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">"AI is taking over Indian small business advertising" — that's the story economic media wants to tell. Advantage+ is the product they're looking for. PR gets there before that narrative becomes a threat, and reframes it as an opportunity.</div>
+      <div style="background:#F0F6FF;border-radius:8px;padding:14px;border-left:2px solid #1877F2;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;margin-bottom:6px;">PR Brief</div>
+        <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Economic Times, Business Standard, YourStory: "How Indian SMBs are using AI to compete with enterprise ad budgets." Founder of Suresh's fashion brand as the spokesperson. PR ties to the agency certification launch. Target: 15+ publications in M4, SMB owner brand recognition survey uplift ≥ 30%.</div>
+      </div>
+    </div><div style="background:white;border-radius:12px;padding:26px;border:1.5px solid #e8e8e8;">
+      <div style="font-size:17px;margin-bottom:10px;">🔁</div>
+      <div style="font-weight:700;font-size:14px;color:#1A1A1A;margin-bottom:8px;">Retention + Referral — Transparency is the Retention Mechanic</div>
+      <div style="font-size:11px;color:#888;line-height:1.65;margin-bottom:14px;">An SMB who understands what Advantage+ is doing stays. Transparency — plain-language performance summaries, AI-explained results in Hindi/Tamil — is not a nice-to-have. It's the primary churn prevention mechanism.</div>
+      <div style="background:#F0F6FF;border-radius:8px;padding:14px;border-left:2px solid #1877F2;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#1877F2;margin-bottom:6px;">Retention Architecture</div>
+        <div style="font-size:11px;color:#2E2E2E;line-height:1.6;">Weekly WhatsApp performance summary: "Your ads reached 4,200 people this week. The AI shifted your budget to Instagram Reels because that's where your buyers were on Tuesday." Business WhatsApp referral: "Tell a fellow SMB about Advantage+ → ₹500 ad credit for both." Target: D60 retention ≥ 67%, referral K-factor ≥ 0.2.</div>
+      </div>
+    </div>
+    </div>
+    <div style="background:#1A1A1A;border-radius:14px;padding:32px;margin-top:8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">The Integrating Principle · My POV</div>
+      <p style="font-size:15px;font-style:italic;font-family:'Playfair Display',serif;color:rgba(255,255,255,0.85);line-height:1.65;max-width:820px;">The GTM lesson from Advantage+ generalises: when the barrier is trust, not awareness, every marketing channel should deliver proof, not promises. Content marketing shows the ROAS. WhatsApp onboarding removes the complexity friction. The agency channel multiplies without proportional spend. The A/B trial makes the product the campaign. This is what a trust-first GTM looks like — and it's why the Phase 2 jump from 200K to 1M is possible without a proportional budget increase.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>
